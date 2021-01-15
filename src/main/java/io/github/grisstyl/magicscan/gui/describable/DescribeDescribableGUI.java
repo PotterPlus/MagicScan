@@ -1,8 +1,8 @@
 package io.github.grisstyl.magicscan.gui.describable;
 
-import io.github.grisstyl.api.gui.GUI;
-import io.github.grisstyl.api.gui.button.AutoGUIButton;
-import io.github.grisstyl.api.gui.button.GUIButton;
+import io.github.grisstyl.ppapi.gui.GUI;
+import io.github.grisstyl.ppapi.gui.button.AutoGUIButton;
+import io.github.grisstyl.ppapi.gui.button.GUIButton;
 import io.github.grisstyl.magicscan.misc.Describable;
 import lombok.Setter;
 import org.bukkit.entity.HumanEntity;

@@ -1,14 +1,14 @@
 package io.github.grisstyl.magicscan.gui.prompt;
 
-import io.github.grisstyl.api.gui.ConfirmPrompt;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.gui.ConfirmPrompt;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
 import io.github.grisstyl.magicscan.MagicScanController;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * Copyright (c) 2013-2020 Tyler Grissom

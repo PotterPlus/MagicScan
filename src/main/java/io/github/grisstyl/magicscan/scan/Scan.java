@@ -7,10 +7,10 @@ import com.besaba.revonline.pastebinapi.paste.PasteBuilder;
 import com.besaba.revonline.pastebinapi.paste.PasteVisiblity;
 import com.besaba.revonline.pastebinapi.response.Response;
 import com.google.common.collect.ImmutableMap;
-import io.github.grisstyl.api.misc.BooleanFormat;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
-import io.github.grisstyl.api.misc.PluginLogger;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.BooleanFormat;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.PluginLogger;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.MagicScanPlugin;
 import io.github.grisstyl.magicscan.gui.ScanResultsGUI;
@@ -38,8 +38,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-import static io.github.grisstyl.api.misc.StringUtilities.equalsAny;
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.equalsAny;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * Represents a scan initiated by a CommandSender, all of its settings, and its results.

@@ -2,7 +2,7 @@ package io.github.grisstyl.magicscan.magic.spell;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
 import io.github.grisstyl.magicscan.misc.Describable;
 import lombok.Getter;
 import org.bukkit.Material;

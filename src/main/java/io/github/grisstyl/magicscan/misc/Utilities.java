@@ -1,7 +1,7 @@
 package io.github.grisstyl.magicscan.misc;
 
-import io.github.grisstyl.api.command.CommandContext;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.command.CommandContext;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.magic.MagicSpell;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

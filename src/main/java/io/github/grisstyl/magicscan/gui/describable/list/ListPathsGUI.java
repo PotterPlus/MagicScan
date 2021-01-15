@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan.gui.describable.list;
 
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.gui.describable.ListDescribablesGUI;
 import io.github.grisstyl.magicscan.magic.MagicPath;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * A simple paginated GUI listing available Magic paths.

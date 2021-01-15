@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan.gui.prompt;
 
-import io.github.grisstyl.api.gui.ConfirmPrompt;
+import io.github.grisstyl.ppapi.gui.ConfirmPrompt;
 import io.github.grisstyl.magicscan.scan.Scan;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;

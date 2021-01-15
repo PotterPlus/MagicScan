@@ -2,7 +2,7 @@ package io.github.grisstyl.magicscan.magic;
 
 import com.elmakers.mine.bukkit.api.wand.Wand;
 import com.elmakers.mine.bukkit.api.wand.WandTemplate;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import lombok.NonNull;
 import org.bukkit.command.CommandSender;

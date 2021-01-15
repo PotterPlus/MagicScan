@@ -1,13 +1,13 @@
 package io.github.grisstyl.magicscan.command.sub;
 
-import io.github.grisstyl.api.command.CommandBase;
-import io.github.grisstyl.api.command.CommandContext;
+import io.github.grisstyl.ppapi.command.CommandBase;
+import io.github.grisstyl.ppapi.command.CommandContext;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.MagicScanPlugin;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import static io.github.grisstyl.api.misc.StringUtilities.equalsAny;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.equalsAny;
 
 /**
  * TODO Write docs

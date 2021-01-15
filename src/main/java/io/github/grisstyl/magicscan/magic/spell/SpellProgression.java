@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan.magic.spell;
 
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.magic.MagicSpell;
 import io.github.grisstyl.magicscan.misc.Describable;

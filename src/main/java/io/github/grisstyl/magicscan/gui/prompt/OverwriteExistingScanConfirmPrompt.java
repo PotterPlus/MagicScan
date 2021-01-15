@@ -1,8 +1,8 @@
 package io.github.grisstyl.magicscan.gui.prompt;
 
-import io.github.grisstyl.api.command.CommandContext;
-import io.github.grisstyl.api.gui.ConfirmPrompt;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.command.CommandContext;
+import io.github.grisstyl.ppapi.gui.ConfirmPrompt;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.scan.Scan;
 import org.bukkit.entity.Player;

@@ -1,10 +1,10 @@
 package io.github.grisstyl.magicscan.gui.describable.list;
 
-import io.github.grisstyl.api.gui.button.AutoGUIButton;
-import io.github.grisstyl.api.gui.button.GUIButton;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
-import io.github.grisstyl.api.misc.PluginLogger;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.gui.button.AutoGUIButton;
+import io.github.grisstyl.ppapi.gui.button.GUIButton;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.PluginLogger;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.file.ConfigFile;
 import io.github.grisstyl.magicscan.gui.describable.ListDescribablesGUI;
@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * A GUI listing all Magic spells.

@@ -1,10 +1,10 @@
 package io.github.grisstyl.magicscan.command.sub;
 
-import io.github.grisstyl.api.command.CommandBase;
-import io.github.grisstyl.api.command.CommandContext;
-import io.github.grisstyl.api.gui.GUI;
-import io.github.grisstyl.api.misc.BooleanFormat;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.command.CommandBase;
+import io.github.grisstyl.ppapi.command.CommandContext;
+import io.github.grisstyl.ppapi.gui.GUI;
+import io.github.grisstyl.ppapi.misc.BooleanFormat;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.MagicScanPlugin;
 import io.github.grisstyl.magicscan.command.MagicScanCommand;
@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.grisstyl.api.misc.StringUtilities.equalsAny;
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.equalsAny;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * Handles the sub-command logic for /magicscan scan.

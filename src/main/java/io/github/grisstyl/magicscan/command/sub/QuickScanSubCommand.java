@@ -1,7 +1,7 @@
 package io.github.grisstyl.magicscan.command.sub;
 
-import io.github.grisstyl.api.command.CommandBase;
-import io.github.grisstyl.api.command.CommandContext;
+import io.github.grisstyl.ppapi.command.CommandBase;
+import io.github.grisstyl.ppapi.command.CommandContext;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.task.QuickScanTask;
 import lombok.NonNull;

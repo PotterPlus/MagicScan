@@ -1,8 +1,8 @@
 package io.github.grisstyl.magicscan.command;
 
-import io.github.grisstyl.api.command.CommandBase;
-import io.github.grisstyl.api.command.CommandContext;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.command.CommandBase;
+import io.github.grisstyl.ppapi.command.CommandContext;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.MagicScanPlugin;
 import io.github.grisstyl.magicscan.command.sub.*;
@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.grisstyl.api.misc.StringUtilities.equalsAny;
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.equalsAny;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 import static org.apache.commons.lang.StringUtils.startsWithIgnoreCase;
 
 public class MagicScanCommand extends CommandBase<MagicScanPlugin> {

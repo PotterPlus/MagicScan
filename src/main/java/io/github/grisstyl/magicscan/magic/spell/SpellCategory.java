@@ -1,8 +1,8 @@
 package io.github.grisstyl.magicscan.magic.spell;
 
 import com.elmakers.mine.bukkit.api.spell.SpellTemplate;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.magic.MagicSpell;
 import io.github.grisstyl.magicscan.magic.MagicType;

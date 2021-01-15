@@ -1,7 +1,7 @@
 package io.github.grisstyl.magicscan.command.sub;
 
-import io.github.grisstyl.api.command.CommandBase;
-import io.github.grisstyl.api.command.CommandContext;
+import io.github.grisstyl.ppapi.command.CommandBase;
+import io.github.grisstyl.ppapi.command.CommandContext;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.MagicScanPlugin;
 import io.github.grisstyl.magicscan.command.MagicScanCommand;
@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.grisstyl.api.misc.StringUtilities.equalsAny;
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.equalsAny;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * TODO Write docs

@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan;
 
-import io.github.grisstyl.api.gui.GUI;
+import io.github.grisstyl.ppapi.gui.GUI;
 import io.github.grisstyl.magicscan.command.MagicScanCommand;
 import io.github.grisstyl.magicscan.listener.QuitListener;
 import io.github.grisstyl.magicscan.scan.Scan;

@@ -2,8 +2,8 @@ package io.github.grisstyl.magicscan.magic;
 
 import com.elmakers.mine.bukkit.api.block.MaterialAndData;
 import com.elmakers.mine.bukkit.api.entity.EntityData;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
-import io.github.grisstyl.api.misc.StringUtilities;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.StringUtilities;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.file.MagicDefFile;
 import io.github.grisstyl.magicscan.misc.Describable;

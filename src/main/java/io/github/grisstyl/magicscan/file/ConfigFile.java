@@ -3,7 +3,7 @@ package io.github.grisstyl.magicscan.file;
 import com.elmakers.mine.bukkit.api.block.MaterialAndData;
 import com.elmakers.mine.bukkit.api.item.ItemData;
 import com.elmakers.mine.bukkit.api.magic.MageController;
-import io.github.grisstyl.api.misc.PluginLogger;
+import io.github.grisstyl.ppapi.misc.PluginLogger;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.rule.RuleType;
 import lombok.NonNull;

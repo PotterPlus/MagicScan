@@ -1,9 +1,9 @@
 package io.github.grisstyl.magicscan.gui;
 
-import io.github.grisstyl.api.gui.button.AutoGUIButton;
-import io.github.grisstyl.api.gui.button.GUIButton;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
-import io.github.grisstyl.api.misc.PluginLogger;
+import io.github.grisstyl.ppapi.gui.button.AutoGUIButton;
+import io.github.grisstyl.ppapi.gui.button.GUIButton;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.misc.PluginLogger;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.command.MagicScanCommand;
 import io.github.grisstyl.magicscan.file.ConfigFile;

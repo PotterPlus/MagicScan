@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan.gui.prompt;
 
-import io.github.grisstyl.api.gui.ConfirmPrompt;
+import io.github.grisstyl.ppapi.gui.ConfirmPrompt;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.misc.Describable;
 import io.github.grisstyl.magicscan.task.DescribeCollectionTask;

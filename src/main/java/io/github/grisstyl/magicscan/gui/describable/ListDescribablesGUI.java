@@ -1,7 +1,7 @@
 package io.github.grisstyl.magicscan.gui.describable;
 
-import io.github.grisstyl.api.gui.PaginatedGUI;
-import io.github.grisstyl.api.gui.button.AutoGUIButton;
+import io.github.grisstyl.ppapi.gui.PaginatedGUI;
+import io.github.grisstyl.ppapi.gui.button.AutoGUIButton;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.misc.Describable;
 import lombok.Getter;

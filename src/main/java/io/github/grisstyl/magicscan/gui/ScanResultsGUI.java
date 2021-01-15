@@ -1,9 +1,9 @@
 package io.github.grisstyl.magicscan.gui;
 
-import io.github.grisstyl.api.gui.PaginatedGUI;
-import io.github.grisstyl.api.gui.button.AutoGUIButton;
-import io.github.grisstyl.api.gui.button.GUIButton;
-import io.github.grisstyl.api.misc.ItemStackBuilder;
+import io.github.grisstyl.ppapi.gui.PaginatedGUI;
+import io.github.grisstyl.ppapi.gui.button.AutoGUIButton;
+import io.github.grisstyl.ppapi.gui.button.GUIButton;
+import io.github.grisstyl.ppapi.misc.ItemStackBuilder;
 import io.github.grisstyl.magicscan.MagicScanController;
 import io.github.grisstyl.magicscan.file.ConfigFile;
 import io.github.grisstyl.magicscan.magic.MagicSpell;
@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-import static io.github.grisstyl.api.misc.StringUtilities.replaceMap;
+import static io.github.grisstyl.ppapi.misc.StringUtilities.replaceMap;
 
 /**
  * TODO Write docs

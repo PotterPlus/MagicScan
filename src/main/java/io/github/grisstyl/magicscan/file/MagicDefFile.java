@@ -1,6 +1,6 @@
 package io.github.grisstyl.magicscan.file;
 
-import io.github.grisstyl.api.file.YamlFile;
+import io.github.grisstyl.ppapi.file.YamlFile;
 import io.github.grisstyl.magicscan.MagicScanController;
 
 import java.io.File;
