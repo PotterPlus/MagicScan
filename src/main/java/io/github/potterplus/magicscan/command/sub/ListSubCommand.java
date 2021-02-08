@@ -3,7 +3,7 @@ package io.github.potterplus.magicscan.command.sub;
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.gui.ConfirmPrompt;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
@@ -16,7 +16,7 @@ import org.bukkit.Material;
 
 import java.util.ArrayList;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
 
 /**
  * TODO Write docs
@@ -83,7 +83,7 @@ public class ListSubCommand extends CommandBase.SubCommand {
                     );
 
                     confirm.setInfoItem(
-                            ItemStackBuilder
+                            Icon
                             .start(Material.PAPER)
                             .name("&cAre you sure you want to describe that many spells?")
                             .lore("&7You can do &e/ms list spells --gui &7in-game to", "&7list them in a GUI&8.")

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * A controller for containing and managing scans.

@@ -4,10 +4,10 @@ import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.gui.GUI;
 import io.github.potterplus.api.gui.button.AutoGUIButton;
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.BooleanFormatter;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.rule.SpellRule;
@@ -50,8 +50,8 @@ public class RuleListEditGUI extends GUI {
 
         ConfigFile config = controller.getConfig();
 
-        ItemStackBuilder enabled = ItemStackBuilder.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
-        ItemStackBuilder disabled = ItemStackBuilder.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
+        Icon enabled = Icon.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
+        Icon disabled = Icon.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
 
         Player owner = returnTo.getOwner();
         Scan scan = controller.getScanController().getQueuedScan(owner);
@@ -64,7 +64,7 @@ public class RuleListEditGUI extends GUI {
             return;
         }
 
-        ItemStackBuilder spells = ItemStackBuilder
+        Icon spells = Icon
                 .of(config.getIcon("info", Material.NAME_TAG))
                 .name(controller.getMessage("gui.rule_list_edit.spell_rules.name"));
 
@@ -123,7 +123,7 @@ public class RuleListEditGUI extends GUI {
         }
 
         GUIButton enableAll = new GUIButton(
-                ItemStackBuilder
+                Icon
                 .of(config.getIcon("enable", Material.EMERALD))
                 .name(controller.getMessage("gui.rule_list_edit.enable_all.name"))
                 .lore(controller.getLore("gui.rule_list_edit.enable_all.lore"))
@@ -146,7 +146,7 @@ public class RuleListEditGUI extends GUI {
         });
 
         GUIButton disableAll = new GUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("disable", Material.REDSTONE))
                         .name(controller.getMessage("gui.rule_list_edit.disable_all.name"))
                         .lore(controller.getLore("gui.rule_list_edit.disable_all.lore"))
@@ -169,7 +169,7 @@ public class RuleListEditGUI extends GUI {
         });
 
         GUIButton toggleAll = new GUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("toggle", Material.NETHER_STAR))
                         .name(controller.getMessage("gui.rule_list_edit.toggle_all.name"))
                         .lore(controller.getLore("gui.rule_list_edit.toggle_all.lore"))
@@ -193,7 +193,7 @@ public class RuleListEditGUI extends GUI {
 
         if (returnTo != null) {
             GUIButton returnToPage = new GUIButton(
-                    ItemStackBuilder
+                    Icon
                             .of(config.getIcon("back", Material.ARROW))
                             .name(controller.getMessage("gui.rule_list_edit.return.name"))
                             .lore(controller.getLore("gui.rule_list_edit.return.lore"))

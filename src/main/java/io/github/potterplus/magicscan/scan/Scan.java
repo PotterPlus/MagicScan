@@ -7,10 +7,10 @@ import com.besaba.revonline.pastebinapi.paste.PasteBuilder;
 import com.besaba.revonline.pastebinapi.paste.PasteVisiblity;
 import com.besaba.revonline.pastebinapi.response.Response;
 import com.google.common.collect.ImmutableMap;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.BooleanFormatter;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.gui.ScanResultsGUI;
@@ -38,8 +38,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * Represents a scan initiated by a CommandSender, all of its settings, and its results.
@@ -606,7 +606,7 @@ public class Scan implements ConfigurationSerializable, Describable {
             lore.set(i, str.substring(2));
         }
 
-        return ItemStackBuilder
+        return Icon
                 .skull(player)
                 .name(name)
                 .lore(lore)

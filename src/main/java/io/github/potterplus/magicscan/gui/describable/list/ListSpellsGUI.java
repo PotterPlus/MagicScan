@@ -2,12 +2,13 @@ package io.github.potterplus.magicscan.gui.describable.list;
 
 import io.github.potterplus.api.gui.button.AutoGUIButton;
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
+import io.github.potterplus.magicscan.gui.spell.SpellBreakdownGUI;
 import io.github.potterplus.magicscan.magic.MagicSpell;
 import io.github.potterplus.magicscan.magic.spell.SpellCategory;
 import io.github.potterplus.magicscan.misc.Describable;
@@ -72,8 +73,8 @@ public class ListSpellsGUI extends ListDescribablesGUI {
     void refreshToolbar() {
         MagicScanController controller = getController();
         ConfigFile config = controller.getConfig();
-        ItemStackBuilder enabled = ItemStackBuilder.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
-        ItemStackBuilder disabled = ItemStackBuilder.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
+        Icon enabled = Icon.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
+        Icon disabled = Icon.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
         
         GUIButton showHidden = new GUIButton(
                 this.showHidden
@@ -133,7 +134,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
         }
 
         GUIButton cycleCategories = new GUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("cycle", Material.MAP))
                         .name(controller.getMessage("gui.list_spells.cycle_categories.name", StringUtilities.replaceMap("$currentCategory", getCurrentCategory())))
                         .lore(controller.getLore("gui.list_spells.cycle_categories.lore"))
@@ -223,7 +224,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
 
         if (empty) {
             addButton(new AutoGUIButton(
-                    ItemStackBuilder
+                    Icon
                             .of(controller.getConfig().getIcon("empty", Material.BARRIER))
                             .name(controller.getMessage("gui.list_spells.no_spells.name"))
                             .lore(controller.getLore("gui.list_spells.no_spells.lore"))
@@ -251,7 +252,11 @@ public class ListSpellsGUI extends ListDescribablesGUI {
 
         item.setItemMeta(meta);
 
-        GUIButton button = new AutoGUIButton(item);
+        GUIButton button = new GUIButton(item);
+
+        button.setListener((event -> {
+            new SpellBreakdownGUI(getController(), spell).activate(event.getWhoClicked());
+        }));
 
         this.addButton(button);
     }

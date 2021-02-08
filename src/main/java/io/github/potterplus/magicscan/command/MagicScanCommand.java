@@ -2,7 +2,7 @@ package io.github.potterplus.magicscan.command;
 
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.command.sub.*;
@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 import static org.apache.commons.lang.StringUtils.startsWithIgnoreCase;
 
 public class MagicScanCommand extends CommandBase<MagicScanPlugin> {

@@ -2,7 +2,7 @@ package io.github.potterplus.magicscan.magic;
 
 import com.elmakers.mine.bukkit.api.wand.Wand;
 import com.elmakers.mine.bukkit.api.wand.WandTemplate;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import lombok.NonNull;
 import org.bukkit.command.CommandSender;

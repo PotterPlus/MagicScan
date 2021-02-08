@@ -4,7 +4,7 @@ import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.gui.GUI;
 import io.github.potterplus.api.misc.BooleanFormatter;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * Handles the sub-command logic for /magicscan scan.

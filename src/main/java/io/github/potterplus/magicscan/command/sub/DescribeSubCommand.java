@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * TODO Write docs

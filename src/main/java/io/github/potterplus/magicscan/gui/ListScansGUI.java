@@ -2,7 +2,7 @@ package io.github.potterplus.magicscan.gui;
 
 import io.github.potterplus.api.gui.button.AutoGUIButton;
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
@@ -51,7 +51,7 @@ public class ListScansGUI extends ListDescribablesGUI {
     }
 
     public GUIButton createButton(Scan scan) {
-        ItemStackBuilder item = ItemStackBuilder.of(scan.describeAsItem(getTarget()));
+        Icon item = Icon.of(scan.describeAsItem(getTarget()));
         boolean isOwned = scan.getSender().equals(getTarget());
 
         if (isOwned) {
@@ -129,7 +129,7 @@ public class ListScansGUI extends ListDescribablesGUI {
 
         if (getTarget().hasPermission(MagicScanCommand.PERMISSION_SCAN_CLEAR)) {
             GUIButton clear = new GUIButton(
-                    ItemStackBuilder
+                    Icon
                             .of(config.getIcon("empty", Material.BARRIER))
                             .name("&cClear all scans")
                             .lore("&8> &7Click to clear all scans")
@@ -157,7 +157,7 @@ public class ListScansGUI extends ListDescribablesGUI {
         GUIButton create = getController().getScanController().hasScan(getTarget())
                 ? createButton(getController().getScanController().getQueuedScan(getTarget()))
                 : new GUIButton(
-                ItemStackBuilder
+                Icon
                         .start(Material.EMERALD)
                         .name("&aCreate new scan")
                         .lore("&8> &7Click to create a new scan")
@@ -193,7 +193,7 @@ public class ListScansGUI extends ListDescribablesGUI {
         this.refreshEntries();
 
         if (getInventory().getItem(0) == null) {
-            ItemStackBuilder item = ItemStackBuilder.start(Material.BARRIER);
+            Icon item = Icon.start(Material.BARRIER);
 
             if (getController().getScanController().hasScan(getTarget())) {
                 item.name("&cNo other scans found");

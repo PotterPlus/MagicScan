@@ -2,7 +2,7 @@ package io.github.potterplus.magicscan.gui.prompt;
 
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.gui.ConfirmPrompt;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.scan.Scan;
 import org.bukkit.entity.Player;
@@ -38,7 +38,7 @@ public class OverwriteExistingScanConfirmPrompt extends ConfirmPrompt {
         }
 
         this.setInfoItem(
-                ItemStackBuilder
+                Icon
                         .of(scan.describeAsItem(player))
                         .name("&7Are you sure you want to overwrite your existing scan?")
         );

@@ -3,9 +3,9 @@ package io.github.potterplus.magicscan.gui;
 import io.github.potterplus.api.gui.GUI;
 import io.github.potterplus.api.gui.button.AutoGUIButton;
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.BooleanFormatter;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.rule.SpellRule;
@@ -61,19 +61,19 @@ public class ManageScanGUI extends GUI {
         ConfigFile config = controller.getConfig();
         Scan scan = controller.getScanController().getQueuedScan(owner);
 
-        ItemStackBuilder enabled = ItemStackBuilder
+        Icon enabled = Icon
                 .of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS))
                 .lore(controller.getLore("gui.manage_scan.enabled_toggle.lore"));
-        ItemStackBuilder disabled = ItemStackBuilder
+        Icon disabled = Icon
                 .of(config.getIcon("disabled", Material.RED_STAINED_GLASS))
                 .lore(controller.getLore("gui.manage_scan.disabled_toggle.lore"));
 
-        ItemStackBuilder readyIcon = scan.isMeetingConditions()
-                ? ItemStackBuilder
+        Icon readyIcon = scan.isMeetingConditions()
+                ? Icon
                 .of(config.getIcon("confirm", Material.EMERALD))
                 .name(controller.getMessage("gui.manage_scan.execute_ready.name"))
                 .lore(controller.getLore("gui.manage_scan.execute_ready.lore"))
-                : ItemStackBuilder
+                : Icon
                 .of(config.getIcon("deny", Material.REDSTONE))
                 .name(controller.getMessage("gui.manage_scan.execute_not_ready.name"))
                 .lore(controller.getLore("gui.manage_scan.execute_not_ready.lore"));
@@ -95,7 +95,7 @@ public class ManageScanGUI extends GUI {
         this.setButton(0, execute);
 
         GUIButton time = new AutoGUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("time", Material.CLOCK))
                         .name(controller.getMessage("gui.manage_scan.time.name", StringUtilities.replaceMap("$time", controller.getConfig().getDateFormat().format(scan.getCreatedAt())))
                         )
@@ -172,7 +172,7 @@ public class ManageScanGUI extends GUI {
         this.setButton(20, scanHidden);
         this.setButton(21, visual);
 
-        ItemStackBuilder editRulesItem = ItemStackBuilder
+        Icon editRulesItem = Icon
                 .of(config.getIcon("edit", Material.WRITABLE_BOOK))
                 .name(controller.getMessage("gui.manage_scan.edit_rules.name"))
                 .lore(controller.getLore("gui.manage_scan.edit_rules.lore"));

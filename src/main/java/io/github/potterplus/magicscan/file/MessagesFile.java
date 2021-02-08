@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan.file;
 
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.api.storage.flatfile.PluginYamlFile;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;

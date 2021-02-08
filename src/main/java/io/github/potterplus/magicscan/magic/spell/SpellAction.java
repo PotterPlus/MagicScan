@@ -2,7 +2,7 @@ package io.github.potterplus.magicscan.magic.spell;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.magicscan.misc.Describable;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -81,7 +81,7 @@ public class SpellAction implements Describable, Comparable<SpellAction> {
 
     @Override
     public ItemStack describeAsItem(CommandSender sender) {
-        return ItemStackBuilder
+        return Icon
                 .start(Material.PAPER)
                 .name(name)
                 .lore(this.describe(sender))

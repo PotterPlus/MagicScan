@@ -1,11 +1,11 @@
 package io.github.potterplus.magicscan.gui.describable.describe;
 
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.gui.describable.DescribeDescribableGUI;
 import io.github.potterplus.magicscan.magic.MagicSpell;
 import org.bukkit.entity.HumanEntity;
 
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * A GUI describing a specific Magic spell.

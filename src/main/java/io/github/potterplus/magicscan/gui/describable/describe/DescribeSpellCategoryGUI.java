@@ -4,7 +4,7 @@ import io.github.potterplus.magicscan.gui.describable.DescribeDescribableGUI;
 import io.github.potterplus.magicscan.magic.spell.SpellCategory;
 import org.bukkit.entity.HumanEntity;
 
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * A GUI describing a specific Magic spell category.

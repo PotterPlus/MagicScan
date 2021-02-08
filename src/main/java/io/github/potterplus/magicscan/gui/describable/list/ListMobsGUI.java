@@ -1,9 +1,9 @@
 package io.github.potterplus.magicscan.gui.describable.list;
 
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
 import io.github.potterplus.magicscan.magic.MagicMob;
@@ -29,7 +29,7 @@ public class ListMobsGUI extends ListDescribablesGUI {
     void refreshToolbar() {
         MagicScanController controller = this.getController();
         GUIButton clearAll = new GUIButton(
-                ItemStackBuilder
+                Icon
                         .of(controller.getConfig().getIcon("empty", Material.BARRIER))
                         .name(controller.getMessage("gui.list_mobs.clear_all.name"))
                         .lore(controller.getLore("gui.list_mobs.clear_all.lore"))

@@ -1,8 +1,8 @@
 package io.github.potterplus.magicscan.magic.spell;
 
 import com.elmakers.mine.bukkit.api.spell.SpellTemplate;
-import io.github.potterplus.api.item.ItemStackBuilder;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.magic.MagicSpell;
 import io.github.potterplus.magicscan.magic.MagicType;
@@ -101,7 +101,7 @@ public class SpellCategory extends MagicType<com.elmakers.mine.bukkit.api.spell.
 
     @Override
     public ItemStack describeAsItem(CommandSender sender) {
-        ItemStackBuilder builder = ItemStackBuilder
+        Icon builder = Icon
                 .start(Material.PAPER)
                 .lore(this.describe(sender));
 

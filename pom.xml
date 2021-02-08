@@ -83,7 +83,7 @@
         <dependency>
             <groupId>io.github.potterplus.api</groupId>
             <artifactId>PotterPlusAPI</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>1.0.5-SNAPSHOT</version>
         </dependency>
 
         <dependency>

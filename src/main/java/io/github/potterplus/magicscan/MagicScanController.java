@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.file.MagicDefFile;
 import io.github.potterplus.magicscan.file.MessagesFile;

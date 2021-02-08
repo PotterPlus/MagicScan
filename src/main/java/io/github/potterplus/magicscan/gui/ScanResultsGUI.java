@@ -3,7 +3,7 @@ package io.github.potterplus.magicscan.gui;
 import io.github.potterplus.api.gui.PaginatedGUI;
 import io.github.potterplus.api.gui.button.AutoGUIButton;
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.magic.MagicSpell;
@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-import static io.github.potterplus.api.misc.StringUtilities.replaceMap;
+import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * TODO Write docs
@@ -82,7 +82,7 @@ public class ScanResultsGUI extends PaginatedGUI {
         );
 
         GUIButton sortBy = new GUIButton(
-                ItemStackBuilder
+                Icon
                 .of(config.getIcon("cycle", Material.MAP))
                 .name(controller.getMessage("gui.scan_results.sort_by.name", replace))
                 .lore(controller.getLore("gui.scan_results.sort_by.lore", replace))
@@ -97,13 +97,13 @@ public class ScanResultsGUI extends PaginatedGUI {
         });
 
         GUIButton time = new AutoGUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("time", Material.CLOCK))
                         .name(controller.getMessage("gui.scan_results.time.name", replace))
         );
 
         GUIButton totals = new AutoGUIButton(
-                ItemStackBuilder
+                Icon
                         .of(config.getIcon("attribute", Material.PAPER))
                         .name(controller.getMessage("gui.scan_results.totals.name", replace))
                         .lore(controller.getLore("gui.scan_results.totals.lore", replace))
@@ -111,7 +111,7 @@ public class ScanResultsGUI extends PaginatedGUI {
 
         if (config.isUsingPastebinIntegration() && getResults().getPastebinURL() != null) {
             GUIButton pastebinLink = new GUIButton(
-                    ItemStackBuilder
+                    Icon
                             .of(config.getIcon("attribute", Material.PAPER))
                             .name(controller.getMessage("gui.scan_results.pastebin_url.name"))
                             .lore(controller.getMessage("gui.scan_results.pastebin_url.lore"))
@@ -144,7 +144,7 @@ public class ScanResultsGUI extends PaginatedGUI {
             Optional<ItemStack> icon = spell.getIcon();
 
             if (icon.isPresent()) {
-                ItemStackBuilder item = ItemStackBuilder
+                Icon item = Icon
                         .of(icon.get())
                         .lore(controller.getLore("gui.scan_results.violation.lore", replaceMap("$violationsCount", String.valueOf(violations.size()))));
 

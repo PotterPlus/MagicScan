@@ -4,8 +4,8 @@ import com.elmakers.mine.bukkit.api.block.MaterialAndData;
 import com.elmakers.mine.bukkit.api.spell.SpellTemplate;
 import com.elmakers.mine.bukkit.api.wand.WandUpgradePath;
 import com.google.common.base.Splitter;
-import io.github.potterplus.api.item.ItemStackBuilder;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.misc.Utilities;
 import org.bukkit.ChatColor;
@@ -246,7 +246,7 @@ public class MagicPath extends MagicType<WandUpgradePath> implements Comparable<
     public ItemStack describeAsItem(CommandSender sender) {
         MaterialAndData mat = getTemplate().getIcon();
 
-        return ItemStackBuilder
+        return Icon
                 .start(mat == null ? Material.PAPER : mat.getMaterial())
                 .name(getTemplate().getName())
                 .lore(this.describe(sender))

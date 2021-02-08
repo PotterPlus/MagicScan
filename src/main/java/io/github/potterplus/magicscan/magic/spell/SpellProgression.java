@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan.magic.spell;
 
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.magic.MagicSpell;
 import io.github.potterplus.magicscan.misc.Describable;

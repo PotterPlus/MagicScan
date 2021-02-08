@@ -2,8 +2,8 @@ package io.github.potterplus.magicscan.magic;
 
 import com.elmakers.mine.bukkit.api.block.MaterialAndData;
 import com.elmakers.mine.bukkit.api.entity.EntityData;
-import io.github.potterplus.api.item.ItemStackBuilder;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.MagicDefFile;
 import io.github.potterplus.magicscan.misc.Describable;
@@ -310,7 +310,7 @@ public class MagicMob extends MagicType<EntityData> implements Comparable<MagicM
 
     @Override
     public ItemStack describeAsItem(CommandSender sender) {
-        return ItemStackBuilder
+        return Icon
                 .start(Material.getMaterial(getTemplate().getType().toString() + "_SPAWN_EGG"))
                 .name(getTemplate().getName())
                 .lore(this.describe(sender))

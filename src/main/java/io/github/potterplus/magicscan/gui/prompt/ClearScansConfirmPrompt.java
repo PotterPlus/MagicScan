@@ -1,7 +1,7 @@
 package io.github.potterplus.magicscan.gui.prompt;
 
 import io.github.potterplus.api.gui.ConfirmPrompt;
-import io.github.potterplus.api.item.ItemStackBuilder;
+import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.gui.ListScansGUI;
 import org.bukkit.Material;
@@ -18,7 +18,7 @@ public class ClearScansConfirmPrompt extends ConfirmPrompt {
     private ListScansGUI returnTo;
 
     public ClearScansConfirmPrompt(MagicScanController controller) {
-        super("Clear all scans?", ItemStackBuilder
+        super("Clear all scans?", Icon
                 .start(Material.NAME_TAG)
                 .name("&7Are you sure you want to clear all scans?")
                 .lore("&3There are currently &b" + controller.getScanController().getQueuedScans().size() + " &3queued scans.", "&4Warning: &cThis cannot be undone!")

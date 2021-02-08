@@ -8,7 +8,7 @@ import com.elmakers.mine.bukkit.api.spell.SpellKey;
 import com.elmakers.mine.bukkit.api.spell.SpellTemplate;
 import com.google.common.base.Splitter;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.magic.spell.SpellAction;
 import io.github.potterplus.magicscan.magic.spell.SpellCategory;
@@ -17,6 +17,7 @@ import io.github.potterplus.magicscan.magic.spell.SpellUpgradeDescription;
 import io.github.potterplus.magicscan.misc.Utilities;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.inventory.ItemStack;
@@ -145,6 +146,10 @@ public class MagicSpell extends MagicType<SpellTemplate> implements Comparable<M
         }
     }
 
+    public String getNameString() {
+        return getName().isPresent() ? "&e" + getName().get() : "&cUNSPECIFIED";
+    }
+
     public Optional<String> getDescription() {
         String desc = getTemplate().getDescription();
 
@@ -153,6 +158,10 @@ public class MagicSpell extends MagicType<SpellTemplate> implements Comparable<M
         } else {
             return Optional.of(desc);
         }
+    }
+
+    public String getDescriptionString() {
+        return getDescription().isPresent() ? "&e" + getDescription().get() : "&cUNSPECIFIED";
     }
 
     public Optional<MagicSpell> getParent() {
@@ -503,27 +512,19 @@ public class MagicSpell extends MagicType<SpellTemplate> implements Comparable<M
 
         List<String> list = new ArrayList<>();
 
-        list.add("&8- &7key&8: &e" + this.getKey());
+        // So this weird bit is just to make sure the lists look right on console/player sides
 
-        Optional<String> name = this.getName();
-
-        list.add("  &7name&8:");
-
-        if (name.isPresent()) {
-            list.add("    &e" + name.get());
+        if (sender instanceof ConsoleCommandSender) {
+            list.add("&8- &7key&8: &e" + this.getKey());
+            list.add("  &7name&8:");
         } else {
-            list.add("    &cUNSPECIFIED");
+            list.add("&8- &7name&8:");
         }
 
-        Optional<String> desc = this.getDescription();
+        list.add("    " + getNameString());
 
         list.add("  &7description&8:");
-
-        if (desc.isPresent()) {
-            list.add("    &e" + desc.get());
-        } else {
-            list.add("    &cUNSPECIFIED");
-        }
+        list.add("    " + getDescriptionString());
 
         String icon;
 
@@ -653,20 +654,20 @@ public class MagicSpell extends MagicType<SpellTemplate> implements Comparable<M
             }
 
             if (lore.size() > 0) {
-                lore.add(0, " &7&m---------------");
-                lore.add(1, "&7| &8&lFROM ITEM LORE");
-                lore.add(2, " &7&m---------------");
+                lore.add(0, " &7&m--------------------");
+                lore.add(1, " &8&lFROM ITEM LORE");
+                lore.add(2, " &7&m--------------------");
             }
 
-            lore.add(" &7&m---------------");
-            lore.add("&7| &8&lFROM MAGICSCAN");
-            lore.add(" &7&m---------------");
+            lore.add(" &7&m--------------------");
+            lore.add(" &8&lFROM MAGICSCAN");
+            lore.add(" &7&m--------------------");
 
             lore.addAll(this.describe(sender));
 
             meta.setLore(StringUtilities.color(lore));
 
-            getName().ifPresent(name -> meta.setDisplayName(StringUtilities.color("&6" + name)));
+            getName().ifPresent(name -> meta.setDisplayName(StringUtilities.color("&6" + name + " &8(&7key&8: &e" + this.getKey() + "&8)")));
 
             item.setItemMeta(meta);
         }

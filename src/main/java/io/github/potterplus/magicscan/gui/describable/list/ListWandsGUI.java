@@ -1,8 +1,8 @@
 package io.github.potterplus.magicscan.gui.describable.list;
 
 import io.github.potterplus.api.gui.button.GUIButton;
-import io.github.potterplus.api.item.ItemStackBuilder;
-import io.github.potterplus.api.misc.StringUtilities;
+import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
@@ -41,8 +41,8 @@ public class ListWandsGUI extends ListDescribablesGUI {
     void refreshToolbar() {
         MagicScanController controller = getController();
         ConfigFile config = controller.getConfig();
-        ItemStackBuilder enabled = ItemStackBuilder.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
-        ItemStackBuilder disabled = ItemStackBuilder.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
+        Icon enabled = Icon.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
+        Icon disabled = Icon.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
 
         GUIButton showHidden = new GUIButton(
                 this.showHidden

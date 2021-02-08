@@ -7,7 +7,7 @@ import io.github.potterplus.magicscan.MagicScanPlugin;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import static io.github.potterplus.api.misc.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.equalsAny;
 
 /**
  * TODO Write docs
