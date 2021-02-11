@@ -1,17 +1,18 @@
 package io.github.potterplus.magicscan.gui.spell;
 
-import io.github.potterplus.api.gui.GUI;
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
 import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.ui.UserInterface;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.magic.MagicSpell;
+import lombok.NonNull;
 import org.bukkit.Material;
 
-public class SpellBreakdownGUI extends GUI {
+public class SpellBreakdownGUI extends UserInterface {
 
-    private MagicScanController controller;
-    private MagicSpell spell;
+    @NonNull private final MagicScanController controller;
+    @NonNull private final MagicSpell spell;
 
     public SpellBreakdownGUI(MagicScanController controller, MagicSpell spell) {
         super("Creating spell breakdown...", 54);
@@ -35,7 +36,7 @@ public class SpellBreakdownGUI extends GUI {
                         "&7Description&8: &r" + spell.getDescriptionString()
                 );
 
-        setButton(0, new AutoGUIButton(textElements));
+        setButton(0, new AutoUIButton(textElements));
 
         boolean hasPrev = spell.getPreviousLevel().isPresent();
         boolean hasNext = spell.getNextLevel().isPresent();
@@ -44,7 +45,7 @@ public class SpellBreakdownGUI extends GUI {
             Icon icon = Icon
                     .start(Material.BARRIER)
                     .name("&cThis spell only has one level");
-            setButton(53, new AutoGUIButton(icon));
+            setButton(53, new AutoUIButton(icon));
         } else {
             if (hasPrev) {
                 MagicSpell prev = spell.getPreviousLevel().get();
@@ -56,7 +57,7 @@ public class SpellBreakdownGUI extends GUI {
                                 "",
                                 "  &7Current level&8: &e" + spell.getCurrentLevel()
                         );
-                GUIButton button = new GUIButton(icon);
+                UIButton button = new UIButton(icon);
 
                 button.setListener((event -> {
                     new SpellBreakdownGUI(controller, prev).activate(event.getWhoClicked());
@@ -67,7 +68,7 @@ public class SpellBreakdownGUI extends GUI {
                 Icon icon = Icon
                         .start(Material.BARRIER)
                         .name("&cNo previous level");
-                setButton(52, new AutoGUIButton(icon));
+                setButton(52, new AutoUIButton(icon));
             }
 
             if (hasNext) {
@@ -80,7 +81,7 @@ public class SpellBreakdownGUI extends GUI {
                                 "",
                                 "  &7Current level&8: &e" + spell.getCurrentLevel()
                         );
-                GUIButton button = new GUIButton(icon);
+                UIButton button = new UIButton(icon);
 
                 button.setListener((event -> {
                     new SpellBreakdownGUI(controller, next).activate(event.getWhoClicked());
@@ -91,7 +92,7 @@ public class SpellBreakdownGUI extends GUI {
                 Icon icon = Icon
                         .start(Material.BARRIER)
                         .name("&cNo next level");
-                setButton(53, new AutoGUIButton(icon));
+                setButton(53, new AutoUIButton(icon));
             }
         }
     }

@@ -39,7 +39,6 @@ import java.time.Instant;
 import java.util.*;
 
 import static io.github.potterplus.api.string.StringUtilities.equalsAny;
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * Represents a scan initiated by a CommandSender, all of its settings, and its results.
@@ -361,7 +360,7 @@ public class Scan implements ConfigurationSerializable, Describable {
             @Override
             public void run() {
                 if (getResults().getInvalidSpellCount() > 0) {
-                    controller.sendMessage(sender, "spells_found_issues", replaceMap(
+                    controller.sendMessage(sender, "spells_found_issues", ImmutableMap.of(
                             "$violations", String.valueOf(getResults().getViolationsCount()),
                             "$invalid", String.valueOf(getResults().getInvalidSpellCount())
                     ));
@@ -369,16 +368,16 @@ public class Scan implements ConfigurationSerializable, Describable {
                     controller.sendMessage(sender, "spells_no_issues");
                 }
 
-                controller.sendMessage(sender, "spells_passed", replaceMap(
+                controller.sendMessage(sender, "spells_passed", ImmutableMap.of(
                         "$valid", String.valueOf(getResults().getValidSpellCount())
                 ));
 
-                controller.sendMessage(sender, "scan_time", replaceMap(
+                controller.sendMessage(sender, "scan_time", ImmutableMap.of(
                         "$time", String.valueOf(getResults().getElapsedTime())
                 ));
 
                 if (controller.getConfig().isUsingPastebinIntegration() && getResults().getPastebinURL() != null) {
-                    controller.sendMessage(getSender(), "pastebin_posted", replaceMap("$url", getResults().getPastebinURL()));
+                    controller.sendMessage(getSender(), "pastebin_posted", ImmutableMap.of("$url", getResults().getPastebinURL()));
                 }
             }
         }.runTaskLater(plugin, endTicks + interval);

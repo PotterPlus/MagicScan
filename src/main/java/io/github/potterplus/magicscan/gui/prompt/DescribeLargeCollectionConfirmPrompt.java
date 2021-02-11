@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan.gui.prompt;
 
-import io.github.potterplus.api.gui.ConfirmPrompt;
+import io.github.potterplus.api.ui.prompt.ConfirmPrompt;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.misc.Describable;
 import io.github.potterplus.magicscan.task.DescribeCollectionTask;
@@ -16,9 +16,9 @@ import java.util.Collection;
  */
 public class DescribeLargeCollectionConfirmPrompt extends ConfirmPrompt {
 
-    private MagicScanController controller;
-    private Collection<Describable> describables;
-    private CommandSender target;
+    private final MagicScanController controller;
+    private final Collection<Describable> describables;
+    private final CommandSender target;
 
     public DescribeLargeCollectionConfirmPrompt(MagicScanController controller, String title, Collection<Describable> describables, CommandSender target) {
         super(title);

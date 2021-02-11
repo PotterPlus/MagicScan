@@ -12,10 +12,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.misc.PluginLogger;
+import io.github.potterplus.api.storage.flatfile.MessagesFile;
 import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.file.MagicDefFile;
-import io.github.potterplus.magicscan.file.MessagesFile;
 import io.github.potterplus.magicscan.file.RulesFile;
 import io.github.potterplus.magicscan.magic.*;
 import io.github.potterplus.magicscan.magic.spell.SpellAction;
@@ -61,7 +61,7 @@ public class MagicScanController {
     private final ConfigFile config;
 
     @Getter
-    private final MessagesFile messages;
+    private final MessagesFile<MagicScanPlugin> messages;
 
     @Getter
     private final RulesFile rulesFile;
@@ -189,7 +189,7 @@ public class MagicScanController {
         }
 
         this.config = new ConfigFile(this);
-        this.messages = new MessagesFile(this);
+        this.messages = new MessagesFile<>(getPlugin());
         this.rulesFile = new RulesFile(this);
 
         plugin.getConfig().options().copyDefaults(true);

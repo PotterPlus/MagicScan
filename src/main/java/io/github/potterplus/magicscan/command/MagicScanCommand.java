@@ -1,5 +1,6 @@
 package io.github.potterplus.magicscan.command;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
 import io.github.potterplus.api.string.StringUtilities;
@@ -15,7 +16,6 @@ import io.github.potterplus.magicscan.magic.spell.SpellCategory;
 import io.github.potterplus.magicscan.scan.Scan;
 import io.github.potterplus.magicscan.scan.ScanController;
 import lombok.NonNull;
-import org.bukkit.permissions.Permission;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,21 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.potterplus.api.string.StringUtilities.equalsAny;
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 import static org.apache.commons.lang.StringUtils.startsWithIgnoreCase;
 
 public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
-
-    public static final Permission PERMISSION_WILDCARD, PERMISSION_MAGICSCAN, PERMISSION_RELOAD, PERMISSION_SCAN, PERMISSION_SCAN_CLEAR, PERMISSION_SCAN_DELETE;
-
-    static {
-        PERMISSION_WILDCARD = new Permission("magicscan.*");
-        PERMISSION_MAGICSCAN = new Permission("magicscan");
-        PERMISSION_RELOAD = new Permission("magicscan.reload");
-        PERMISSION_SCAN = new Permission("magicscan.scan");
-        PERMISSION_SCAN_CLEAR = new Permission("magicscan.scan.clear");
-        PERMISSION_SCAN_DELETE = new Permission("magicscan.scan.delete");
-    }
 
     public MagicScanCommand(@NonNull MagicScanPlugin plugin) {
         super(plugin);
@@ -58,16 +46,16 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
                 "  &8/&7ms quickscan &8> &6Initiates and performs a quick scan",
                 "  &8/&7ms scan &8> &6Scan related sub-commands",
                 "    &dAliases&8: &7/mss",
-                "  &8/&7ms desc &c<Type> <Key> &a[Key2...] &3--gui &8> &6Describes elements of Magic",
+                "  &8/&7ms desc &c<Type> <Key> &a[Key2...] &3-u &8> &6Describes elements of Magic",
                 "    &cType&8: &7Any of&8:",
                 "      &espell&8, &ecategory&8, &epath&8, &ewand&8, &eaction&8, &emob&8, &eprogression",
                 "    &cKey&8: &7The key of the thing you want to describe&8.",
                 "    &aKey2&8: &7Any more keys are delineated by a space&8.",
-                "    &3--gui&8: &7View in GUI&8.",
-                "  &8/&7ms list &c<Type> &3--gui &8> &6Lists elements of Magic",
+                "    &3--ui&8: &7View in GUI&8.",
+                "  &8/&7ms list &c<Type> &3-u &8> &6Lists elements of Magic",
                 "    &cType&8: &7Any of&8:",
                 "      &espells&8, &ecategories&8, &epaths&8, &ewands&8, &eactions&8, &emobs",
-                "    &3--gui&8: &7View in GUI&8."
+                "    &3--ui&8: &7View in GUI&8."
         );
     }
 
@@ -83,7 +71,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
 
         MagicScanController controller = getPlugin().getController();
 
-        if (!context.hasPermission(PERMISSION_MAGICSCAN)) {
+        if (!context.hasPermission("magicscan.command")) {
             controller.sendMessage(context, "no_permission");
 
             return;
@@ -116,7 +104,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
         if (equalsAny(sub, "help", "?")) {
             context.sendMessage(getHelp());
         } else if (equalsAny(sub, "reload", "load")) {
-            if (!context.hasPermission(PERMISSION_RELOAD)) {
+            if (!context.hasPermission("magicscan.command.reload")) {
                 controller.sendMessage(context, "no_permission");
 
                 return;
@@ -151,7 +139,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
         } else if (equalsAny(sub, "quickscan", "qs")) {
             context.delegate(new QuickScanSubCommand(controller));
         } else if (equalsAny(sub, "actions", "mobs", "paths", "categories", "spells", "wands")) {
-            context.performCommand("magicscan list " + sub + (context.isPlayer() ? " --gui" : ""));
+            context.performCommand("magicscan list " + sub + (context.isPlayer() ? " -u" : ""));
         } else if (equalsAny(sub, "action", "mob", "path", "category", "spell", "progression", "wand")) {
             String key = context.getArg(1);
 
@@ -161,7 +149,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
                 return;
             }
 
-            context.performCommand("magicscan describe <type> <key>", replaceMap("<type>", sub, "<key>", key));
+            context.performCommand("magicscan describe <type> <key>", ImmutableMap.of("<type>", sub, "<key>", key));
         } else {
             context.sendMessage("&dMS&5> &cUnknown sub-command &4'" + sub + "'&c. Do &4/ms ? &cfor help.");
         }
@@ -171,7 +159,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
     public List<String> tab(CommandContext context) {
         List<String> options = new ArrayList<>();
 
-        if (!context.hasPermission(PERMISSION_MAGICSCAN)) {
+        if (!context.hasPermission("magicscan.command")) {
             return options;
         }
 
@@ -307,7 +295,7 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
                         }
 
                         if (args.length > 3 && context.isPlayer()) {
-                            options.add("--gui");
+                            options.add("-u");
                         }
                     }
                 } else if (equalsAny(sub, "list", "l")) {
@@ -320,8 +308,8 @@ public class MagicScanCommand extends CommandBase<MagicScanPlugin> {
                             }
                         }
 
-                        if (!options.contains("--gui") && context.isPlayer()) {
-                            options.add("--gui");
+                        if (!options.contains("-u") && !options.contains("--ui") && context.isPlayer()) {
+                            options.add("-u");
                         }
                     }
                 } else if (equalsAny(sub, "scan", "s")) {

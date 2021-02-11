@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan.gui.prompt;
 
-import io.github.potterplus.api.gui.ConfirmPrompt;
+import io.github.potterplus.api.ui.prompt.ConfirmPrompt;
 import io.github.potterplus.magicscan.scan.Scan;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -11,8 +11,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
  */
 public class ExecuteScanConfirmPrompt extends ConfirmPrompt {
 
-    private Scan scan;
-    private HumanEntity target;
+    private final Scan scan;
+    private final HumanEntity target;
 
     public ExecuteScanConfirmPrompt(Scan scan, HumanEntity target) {
         super("Execute scan?", scan.describeAsItem(target));

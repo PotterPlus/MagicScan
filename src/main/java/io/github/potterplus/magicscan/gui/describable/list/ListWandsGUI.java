@@ -1,8 +1,8 @@
 package io.github.potterplus.magicscan.gui.describable.list;
 
-import io.github.potterplus.api.gui.button.GUIButton;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
-import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
@@ -44,7 +44,7 @@ public class ListWandsGUI extends ListDescribablesGUI {
         Icon enabled = Icon.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
         Icon disabled = Icon.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
 
-        GUIButton showHidden = new GUIButton(
+        UIButton showHidden = new UIButton(
                 this.showHidden
                         ? enabled.name(controller.getMessage("gui.list_wands.show_hidden_enabled.name")).lore(controller.getLore("gui.list_wands.show_hidden_enabled.lore"))
                         : disabled.name(controller.getMessage("gui.list_wands.show_hidden_disabled.name")).lore(controller.getLore("gui.list_wands.show_hidden_disabled.lore"))
@@ -67,7 +67,7 @@ public class ListWandsGUI extends ListDescribablesGUI {
         wands.forEach(this::populate);
 
         boolean empty = getInventory().getItem(0) == null;
-        Map<String, String> countReplaceMap = StringUtilities.replaceMap("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
+        Map<String, String> countReplaceMap = ImmutableMap.of("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
 
         this.setTitle(controller.getMessage("gui.list_wands.title", countReplaceMap));
     }

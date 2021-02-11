@@ -1,10 +1,10 @@
 package io.github.potterplus.magicscan.gui.describable.list;
 
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
@@ -76,7 +76,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
         Icon enabled = Icon.of(config.getIcon("enabled", Material.GREEN_STAINED_GLASS));
         Icon disabled = Icon.of(config.getIcon("disabled", Material.RED_STAINED_GLASS));
         
-        GUIButton showHidden = new GUIButton(
+        UIButton showHidden = new UIButton(
                 this.showHidden
                         ? enabled.name(controller.getMessage("gui.list_spells.show_hidden_enabled.name")).lore(controller.getLore("gui.list_spells.show_hidden_enabled.lore"))
                         : disabled.name(controller.getMessage("gui.list_spells.show_hidden_disabled.name")).lore(controller.getLore("gui.list_spells.show_hidden_disabled.lore"))
@@ -89,7 +89,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
             this.update(event);
         });
 
-        GUIButton showLeveledVariants = new GUIButton(
+        UIButton showLeveledVariants = new UIButton(
                 this.showLeveledVariants
                         ? enabled.name(controller.getMessage("gui.list_spells.show_leveled_variants_enabled.name")).lore(controller.getLore("gui.list_spells.show_leveled_variants_enabled.lore"))
                         : disabled.name(controller.getMessage("gui.list_spells.show_leveled_variants_disabled.name")).lore(controller.getLore("gui.list_spells.show_leveled_variants_disabled.lore"))
@@ -102,7 +102,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
             this.update(event);
         });
 
-        GUIButton showDisabledIcons = new GUIButton(
+        UIButton showDisabledIcons = new UIButton(
                 this.showDisabledIcons
                         ? enabled.name(controller.getMessage("gui.list_spells.show_disabled_icons_enabled.name")).lore(controller.getLore("gui.list_spells.show_hidden_enabled.lore"))
                         : disabled.name(controller.getMessage("gui.list_spells.show_disabled_icons_disabled.name")).lore(controller.getLore("gui.list_spells.show_disabled_icons_disabled.lore"))
@@ -133,10 +133,10 @@ public class ListSpellsGUI extends ListDescribablesGUI {
             categories[i] = lineFormat.replaceAll(Pattern.quote("$cat"), (current.equalsIgnoreCase(getCurrentCategory()) ? currentColor : otherColor) + current);
         }
 
-        GUIButton cycleCategories = new GUIButton(
+        UIButton cycleCategories = new UIButton(
                 Icon
                         .of(config.getIcon("cycle", Material.MAP))
-                        .name(controller.getMessage("gui.list_spells.cycle_categories.name", StringUtilities.replaceMap("$currentCategory", getCurrentCategory())))
+                        .name(controller.getMessage("gui.list_spells.cycle_categories.name", ImmutableMap.of("$currentCategory", getCurrentCategory())))
                         .lore(controller.getLore("gui.list_spells.cycle_categories.lore"))
                         .addLore(categories)
         );
@@ -220,10 +220,10 @@ public class ListSpellsGUI extends ListDescribablesGUI {
         newSpells.forEach(this::populate);
 
         boolean empty = getInventory().getItem(0) == null;
-        Map<String, String> countReplaceMap = StringUtilities.replaceMap("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
+        Map<String, String> countReplaceMap = ImmutableMap.of("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
 
         if (empty) {
-            addButton(new AutoGUIButton(
+            addButton(new AutoUIButton(
                     Icon
                             .of(controller.getConfig().getIcon("empty", Material.BARRIER))
                             .name(controller.getMessage("gui.list_spells.no_spells.name"))
@@ -252,7 +252,7 @@ public class ListSpellsGUI extends ListDescribablesGUI {
 
         item.setItemMeta(meta);
 
-        GUIButton button = new GUIButton(item);
+        UIButton button = new UIButton(item);
 
         button.setListener((event -> {
             new SpellBreakdownGUI(getController(), spell).activate(event.getWhoClicked());

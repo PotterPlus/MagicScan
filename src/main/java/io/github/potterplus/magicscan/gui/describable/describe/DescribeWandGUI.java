@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan.gui.describable.describe;
 
-import io.github.potterplus.api.string.StringUtilities;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.magicscan.gui.describable.DescribeDescribableGUI;
 import io.github.potterplus.magicscan.magic.MagicWand;
 import org.bukkit.entity.HumanEntity;
@@ -11,6 +11,6 @@ import org.bukkit.entity.HumanEntity;
 public class DescribeWandGUI extends DescribeDescribableGUI {
 
     public DescribeWandGUI(MagicWand wand, HumanEntity human) {
-        super(wand.getController().getMessage("gui.describe_wand.title", StringUtilities.replaceMap("$key", wand.getKey())), wand, human);
+        super(wand.getController().getMessage("gui.describe_wand.title", ImmutableMap.of("$key", wand.getKey())), wand, human);
     }
 }

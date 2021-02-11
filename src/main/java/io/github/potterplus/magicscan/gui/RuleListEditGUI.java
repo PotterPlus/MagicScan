@@ -1,13 +1,12 @@
 package io.github.potterplus.magicscan.gui;
 
 import com.google.common.collect.ImmutableMap;
-import io.github.potterplus.api.gui.GUI;
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.BooleanFormatter;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.UserInterface;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.rule.SpellRule;
@@ -24,12 +23,12 @@ import java.util.Map;
 /**
  * TODO Write docs
  */
-public class RuleListEditGUI extends GUI {
+public class RuleListEditGUI extends UserInterface {
 
     @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
-    private ManageScanGUI returnTo;
+    private final ManageScanGUI returnTo;
 
     public RuleListEditGUI(MagicScanController controller, ManageScanGUI returnTo) {
         super(controller.getMessage("gui.rule_list_edit.title"), 54);
@@ -77,11 +76,11 @@ public class RuleListEditGUI extends GUI {
             spells.addLore(controller.getMessage("gui.rule_list_edit.spell_rules.lore_line_format", replace));
         }
 
-        this.addButton(new AutoGUIButton(spells));
+        this.addButton(new AutoUIButton(spells));
 
         for (SpellRule rule : controller.getSpellRules()) {
-            Map<String, String> replace = StringUtilities.replaceMap("$rule", rule.getKey());
-            GUIButton button = new GUIButton(
+            Map<String, String> replace = ImmutableMap.of("$rule", rule.getKey());
+            UIButton button = new UIButton(
                     scan.isOverridden(rule.getKey())
                             ? disabled
                             .name(controller.getMessage("gui.rule_list_edit.spell_rule_disabled.name", replace))
@@ -122,7 +121,7 @@ public class RuleListEditGUI extends GUI {
             this.addButton(button);
         }
 
-        GUIButton enableAll = new GUIButton(
+        UIButton enableAll = new UIButton(
                 Icon
                 .of(config.getIcon("enable", Material.EMERALD))
                 .name(controller.getMessage("gui.rule_list_edit.enable_all.name"))
@@ -145,7 +144,7 @@ public class RuleListEditGUI extends GUI {
             }
         });
 
-        GUIButton disableAll = new GUIButton(
+        UIButton disableAll = new UIButton(
                 Icon
                         .of(config.getIcon("disable", Material.REDSTONE))
                         .name(controller.getMessage("gui.rule_list_edit.disable_all.name"))
@@ -168,7 +167,7 @@ public class RuleListEditGUI extends GUI {
             }
         });
 
-        GUIButton toggleAll = new GUIButton(
+        UIButton toggleAll = new UIButton(
                 Icon
                         .of(config.getIcon("toggle", Material.NETHER_STAR))
                         .name(controller.getMessage("gui.rule_list_edit.toggle_all.name"))
@@ -192,7 +191,7 @@ public class RuleListEditGUI extends GUI {
         });
 
         if (returnTo != null) {
-            GUIButton returnToPage = new GUIButton(
+            UIButton returnToPage = new UIButton(
                     Icon
                             .of(config.getIcon("back", Material.ARROW))
                             .name(controller.getMessage("gui.rule_list_edit.return.name"))

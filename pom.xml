@@ -83,7 +83,7 @@
         <dependency>
             <groupId>io.github.potterplus.api</groupId>
             <artifactId>PotterPlusAPI</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <version>1.0.7-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -113,6 +113,19 @@
     </distributionManagement>
 
     <build>
+        <defaultGoal>clean package</defaultGoal>
+        <finalName>MagicScan</finalName>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>false</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>*.*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

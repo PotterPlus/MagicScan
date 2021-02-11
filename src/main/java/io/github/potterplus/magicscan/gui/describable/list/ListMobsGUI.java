@@ -1,9 +1,9 @@
 package io.github.potterplus.magicscan.gui.describable.list;
 
-import io.github.potterplus.api.gui.button.GUIButton;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
-import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
 import io.github.potterplus.magicscan.magic.MagicMob;
@@ -28,7 +28,7 @@ public class ListMobsGUI extends ListDescribablesGUI {
 
     void refreshToolbar() {
         MagicScanController controller = this.getController();
-        GUIButton clearAll = new GUIButton(
+        UIButton clearAll = new UIButton(
                 Icon
                         .of(controller.getConfig().getIcon("empty", Material.BARRIER))
                         .name(controller.getMessage("gui.list_mobs.clear_all.name"))
@@ -56,7 +56,7 @@ public class ListMobsGUI extends ListDescribablesGUI {
         mobs.forEach(this::populate);
 
         boolean empty = getInventory().getItem(0) == null;
-        Map<String, String> countReplaceMap = StringUtilities.replaceMap("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
+        Map<String, String> countReplaceMap = ImmutableMap.of("$count", empty ? "&cNONE" : String.valueOf(getItems().size()));
 
         this.setTitle(controller.getMessage("gui.list_mobs.title", countReplaceMap));
     }
@@ -72,7 +72,7 @@ public class ListMobsGUI extends ListDescribablesGUI {
         }
 
         MagicMob mob = (MagicMob) describable;
-        GUIButton button = new GUIButton(describable.describeAsItem(this.getTarget()));
+        UIButton button = new UIButton(describable.describeAsItem(this.getTarget()));
 
         button.setListener(event -> {
             event.setCancelled(true);

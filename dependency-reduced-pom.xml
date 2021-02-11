@@ -27,6 +27,18 @@
     <url>https://github.com/github.com/PotterPlus/MagicScan/tree/master</url>
   </scm>
   <build>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <defaultGoal>clean package</defaultGoal>
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <directory>${basedir}/src/main/resources/</directory>
+        <includes>
+          <include>*.*</include>
+        </includes>
+      </resource>
+    </resources>
+    <finalName>MagicScan</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>

@@ -1,5 +1,6 @@
 package io.github.potterplus.magicscan.scan;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.misc.Utilities;
 import lombok.Getter;
@@ -12,15 +13,13 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
-
 /**
  * A controller for containing and managing scans.
  */
 public class ScanController {
 
     @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
     @Getter @Setter
     private Map<String, Scan> queuedScans;
@@ -79,7 +78,7 @@ public class ScanController {
             Player player = Bukkit.getPlayer(key);
 
             if (Utilities.isMessageable(player)) {
-                controller.sendMessage(player, "scan_cleared", replaceMap("$name", sender.getName()));
+                controller.sendMessage(player, "scan_cleared", ImmutableMap.of("$name", sender.getName()));
             }
         }
 

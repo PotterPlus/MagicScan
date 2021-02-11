@@ -1,6 +1,6 @@
 package io.github.potterplus.magicscan;
 
-import io.github.potterplus.api.gui.GUI;
+import io.github.potterplus.api.ui.UserInterface;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
 import io.github.potterplus.magicscan.listener.QuitListener;
 import io.github.potterplus.magicscan.scan.Scan;
@@ -13,6 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
 import org.bukkit.plugin.java.annotation.command.Commands;
 import org.bukkit.plugin.java.annotation.dependency.Dependency;
+import org.bukkit.plugin.java.annotation.dependency.DependsOn;
+import org.bukkit.plugin.java.annotation.dependency.SoftDependency;
+import org.bukkit.plugin.java.annotation.dependency.SoftDependsOn;
 import org.bukkit.plugin.java.annotation.permission.ChildPermission;
 import org.bukkit.plugin.java.annotation.permission.Permission;
 import org.bukkit.plugin.java.annotation.permission.Permissions;
@@ -29,7 +32,12 @@ import org.bukkit.plugin.java.annotation.plugin.author.Author;
 @Description("Scans Magic configurations for potential issues.")
 @Author("T0xicTyler")
 @Website("https://github.com/PotterPlus/MagicScan")
-@Dependency("Magic")
+@DependsOn({
+        @Dependency("Magic")
+})
+@SoftDependsOn({
+        @SoftDependency("PotterPlusAPI")
+})
 @ApiVersion(ApiVersion.Target.v1_13)
 @Commands({
         @Command(
@@ -41,16 +49,16 @@ import org.bukkit.plugin.java.annotation.plugin.author.Author;
 })
 @Permissions({
         @Permission(name = "magicscan.*", desc = "Wildcard permission for /magicscan", children = {
-                @ChildPermission(name = "magicscan"),
-                @ChildPermission(name = "magicscan.reload"),
-                @ChildPermission(name = "magicscan.scan"),
-                @ChildPermission(name = "magicscan.scan.clear")
+                @ChildPermission(name = "magicscan.command"),
+                @ChildPermission(name = "magicscan.command.reload"),
+                @ChildPermission(name = "magicscan.command.scan"),
+                @ChildPermission(name = "magicscan.command.scan.clear")
         }),
-        @Permission(name = "magicscan", desc = "Permits to use /magicscan"),
-        @Permission(name = "magicscan.reload", desc = "Permits to use /magicscan reload"),
-        @Permission(name = "magicscan.scan", desc = "Permits to use /magicscan scan"),
-        @Permission(name = "magicscan.scan.clear", desc = "Permits to use /magicscan scan clear"),
-        @Permission(name = "magicscan.scan.delete", desc = "Permits to use /magicscan scan delete on others")
+        @Permission(name = "magicscan.command", desc = "Permits to use /magicscan"),
+        @Permission(name = "magicscan.command.reload", desc = "Permits to use /magicscan reload"),
+        @Permission(name = "magicscan.command.scan", desc = "Permits to use /magicscan scan"),
+        @Permission(name = "magicscan.command.scan.clear", desc = "Permits to use /magicscan scan clear"),
+        @Permission(name = "magicscan.command.scan.delete", desc = "Permits to use /magicscan scan delete on others")
 })
 public class MagicScanPlugin extends JavaPlugin {
 
@@ -72,7 +80,7 @@ public class MagicScanPlugin extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new QuitListener(controller), this);
 
-        GUI.prepare(this);
+        UserInterface.prepare(this);
 
         this.command = new MagicScanCommand(this);
     }

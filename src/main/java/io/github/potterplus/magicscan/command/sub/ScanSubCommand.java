@@ -1,13 +1,15 @@
 package io.github.potterplus.magicscan.command.sub;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
-import io.github.potterplus.api.gui.GUI;
+import io.github.potterplus.api.command.CommandFlag;
 import io.github.potterplus.api.misc.BooleanFormatter;
+import io.github.potterplus.api.misc.FriendlyBooleans;
 import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.UserInterface;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
-import io.github.potterplus.magicscan.command.MagicScanCommand;
 import io.github.potterplus.magicscan.gui.ListScansGUI;
 import io.github.potterplus.magicscan.gui.ManageScanGUI;
 import io.github.potterplus.magicscan.gui.RuleListEditGUI;
@@ -34,7 +36,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import static io.github.potterplus.api.string.StringUtilities.equalsAny;
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * Handles the sub-command logic for /magicscan scan.
@@ -43,7 +44,7 @@ import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 public class ScanSubCommand extends CommandBase.SubCommand {
 
     @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
     public MagicScanPlugin getPlugin() {
         return controller.getPlugin();
@@ -51,18 +52,18 @@ public class ScanSubCommand extends CommandBase.SubCommand {
 
     public List<String> getScanHelp() {
         return StringUtilities.color(
-                "  &8>> &d/mss Help",
+                "&d&l*** &b/mss command help &d&l***",
                 "  &a[Optional Arg] &c<Required Arg> &3--Optional Flag",
-                "  &8/&7mss create &3--gui &8> &6Create a new scan",
-                "    &3--gui&8: &7Auto open management GUI&8.",
+                "  &8/&7mss create &3-u &8> &6Create a new scan",
+                "    &3--ui&8: &7Auto open management GUI&8.",
                 "  &8/&7mss clear &8> &6Forcibly clears queued scans",
                 "  &8/&7mss delete &a[Target] &8> &6Deletes the current scan",
                 "    &aTarget&8: &7Player name to delete scan for&8.",
                 "  &8/&7mss describe &8> &6Describes the current scan",
                 "  &8/&7mss execute &8> &6Executes the current scan",
                 "  &8/&7mss rules &8> &6Edits the current scan's rules in a GUI",
-                "  &8/&7mss list &3--gui &8> &6Lists the queued scans",
-                "    &3--gui&8: &7Display list in GUI&8.",
+                "  &8/&7mss list &3-u &8> &6Lists the queued scans",
+                "    &3--ui&8: &7Display list in GUI&8.",
                 "  &8/&7mss manage &8> &6Manage your current scan in a GUI",
                 "  &8/&7mss override &c<Rule> &8> &6Toggles the rule",
                 "    &cRule&8: &7A rule key&8.",
@@ -86,7 +87,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
 
     @Override
     public void execute(CommandContext context) {
-        if (!context.hasPermission(MagicScanCommand.PERMISSION_SCAN)) {
+        if (!context.hasPermission("magicscan.command.scan")) {
             controller.sendMessage(context, "no_permission");
 
             return;
@@ -103,6 +104,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
         CommandSender sender = context.getSender();
         ScanController scans = controller.getScanController();
         String sub = context.getArg(1);
+        CommandFlag uiFlag = new CommandFlag.UserInterfaceFlag();
 
         if (sub.equalsIgnoreCase("create")) {
             if (scans.hasScan(sender)) {
@@ -125,7 +127,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 new RemoveInactiveScanTask(controller, sender).runTaskLater(getPlugin(), controller.getConfig().getInactiveScanTimeout());
             }
 
-            if (context.hasFlag("gui") && context.isPlayer()) {
+            if (context.hasFlag(uiFlag) && context.isPlayer()) {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -134,7 +136,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 }.runTaskLater(getPlugin(), 10);
             }
         } else if (equalsAny(sub, "clear")) {
-            if (!context.hasPermission(MagicScanCommand.PERMISSION_SCAN_CLEAR)) {
+            if (!context.hasPermission("magicscan.command.scan.clear")) {
                 controller.sendMessage(context, "no_permission");
 
                 return;
@@ -148,7 +150,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 controller.sendMessage(context, "scans_cleared");
             }
         } else if (equalsAny(sub, "delete", "del")) {
-            if (!context.hasPermission(MagicScanCommand.PERMISSION_SCAN_DELETE)) {
+            if (!context.hasPermission("magicscan.command.scan.delete")) {
                 controller.sendMessage(context,"no_permission");
 
                 return;
@@ -176,14 +178,14 @@ public class ScanSubCommand extends CommandBase.SubCommand {
 
                         if (context.isConsole()) {
                             scans.removeScan(sender);
-                            controller.sendMessage(sender, "scan_deleted_other", replaceMap("$name", target.getName()));
-                            controller.sendMessage(target, "scan_cleared", replaceMap("$name", sender.getName()));
+                            controller.sendMessage(sender, "scan_deleted_other", ImmutableMap.of("$name", target.getName()));
+                            controller.sendMessage(target, "scan_cleared", ImmutableMap.of("$name", sender.getName()));
                         }
                     } else {
                         controller.sendMessage(context, "no_queued_scan_other");
                     }
                 } else {
-                    controller.sendMessage(context, "no_target", replaceMap("$name", context.getArg(2)));
+                    controller.sendMessage(context, "no_target", ImmutableMap.of("$name", context.getArg(2)));
                 }
             }
         } else if (equalsAny(sub, "describe", "desc", "d", "info")) {
@@ -198,7 +200,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 context.sendMessage("&e&l>> &7Perform &d/ms scan perform &7to initiate this scan.");
             }
         } else if (equalsAny(sub, "list", "l")) {
-            if (context.hasFlag("gui") && context.isPlayer()) {
+            if (context.hasFlag(uiFlag) && context.isPlayer()) {
                 new ListScansGUI(context.getPlayer(), controller).activate();
             } else {
                 if (scans.getQueuedScans().isEmpty()) {
@@ -237,9 +239,9 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 Player player = context.getPlayer();
 
                 if (scans.hasScan(player)) {
-                    GUI gui = new ManageScanGUI(controller, player);
+                    UserInterface ui = new ManageScanGUI(controller, player);
 
-                    gui.activate(player);
+                    ui.activate(player);
                 } else {
                     controller.sendMessage(context, "no_queued_scan");
                 }
@@ -272,7 +274,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 }
 
                 if (args.length == 3) {
-                    controller.sendMessage(context, "scan_property", replaceMap("$name", prop.name(), "$bool", BooleanFormatter.ENABLED_DISABLED.format(scan.getOptions().getProperty(prop))));
+                    controller.sendMessage(context, "scan_property", ImmutableMap.of("$name", prop.name(), "$bool", BooleanFormatter.ENABLED_DISABLED.format(scan.getOptions().getProperty(prop))));
                 } else {
                     String s = args[3];
                     String usage = createScanUsage("/mss prop <prop> [true|false|toggle]");
@@ -282,13 +284,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                         return;
                     }
 
-                    Boolean b = StringUtilities.parseBoolean(s);
-
-                    if (b == null) {
-                        context.sendMessage(usage);
-                        return;
-                    }
-
+                    boolean b = FriendlyBooleans.getFriendlyBoolean(s);
                     boolean bool = s.equalsIgnoreCase("toggle")
                             ? !scan.getOptions().getProperty(prop)
                             : b;
@@ -296,7 +292,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                     scan.getOptions().setProperty(prop, bool);
                     scans.putScan(context.getSender(), scan);
 
-                    controller.sendMessage(context, "scan_property_updated", replaceMap("$name", prop.name(), "$bool", BooleanFormatter.ENABLED_DISABLED.format(bool)));
+                    controller.sendMessage(context, "scan_property_updated", ImmutableMap.of("$name", prop.name(), "$bool", BooleanFormatter.ENABLED_DISABLED.format(bool)));
                 }
             }
         } else if (equalsAny(sub, "override")) {
@@ -318,20 +314,20 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                     if (scan.getOptions().getRuleOverrides().contains(key)) {
                         scan.getOptions().getRuleOverrides().remove(key);
 
-                        controller.sendMessage(context, "rule_toggled", replaceMap(
+                        controller.sendMessage(context, "rule_toggled", ImmutableMap.of(
                                 "$key", key,
                                 "$bool", BooleanFormatter.ENABLED_DISABLED.format(true)
                         ));
                     } else {
                         scan.getOptions().getRuleOverrides().add(key);
 
-                        controller.sendMessage(context, "rule_toggled", replaceMap(
+                        controller.sendMessage(context, "rule_toggled", ImmutableMap.of(
                                 "$key", key,
                                 "$bool", BooleanFormatter.ENABLED_DISABLED.format(false)
                         ));
                     }
                 } else {
-                    controller.sendMessage(context, "invalid_rule", replaceMap("$key", key));
+                    controller.sendMessage(context, "invalid_rule", ImmutableMap.of("$key", key));
                 }
             }
         } else if (equalsAny(sub, "yes", "enable")) {
@@ -347,7 +343,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 context.sendMessage(createScanUsage("/mss enable <rule>"));
             } else {
                 String key = context.getArg(2);
-                Map<String, String> replace = replaceMap("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(true));
+                Map<String, String> replace = ImmutableMap.of("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(true));
 
                 if (key.equalsIgnoreCase("all")) {
                     for (SpellRule rule : controller.getSpellRules()) {
@@ -378,7 +374,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 context.sendMessage(createScanUsage("/mss disable <rule>"));
             } else {
                 String key = context.getArg(2);
-                Map<String, String> replace = replaceMap("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(false));
+                Map<String, String> replace = ImmutableMap.of("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(false));
 
                 if (key.equalsIgnoreCase("all")) {
                     for (SpellRule rule : controller.getSpellRules()) {
@@ -409,7 +405,7 @@ public class ScanSubCommand extends CommandBase.SubCommand {
                 context.sendMessage(createScanUsage("/mss only <rule>"));
             } else {
                 String key = context.getArg(2);
-                Map<String, String> replace = replaceMap("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(false));
+                Map<String, String> replace = ImmutableMap.of("$key", key, "$bool", BooleanFormatter.ENABLED_DISABLED.format(false));
 
                 Optional<SpellRule> opt = controller.resolveSpellRule(key);
 

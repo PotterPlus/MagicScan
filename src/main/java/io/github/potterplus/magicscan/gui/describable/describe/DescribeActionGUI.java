@@ -1,12 +1,10 @@
 package io.github.potterplus.magicscan.gui.describable.describe;
 
-import io.github.potterplus.api.string.StringUtilities;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.gui.describable.DescribeDescribableGUI;
 import io.github.potterplus.magicscan.magic.spell.SpellAction;
 import org.bukkit.entity.HumanEntity;
-
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * A GUI describing a specific Magic action.
@@ -14,6 +12,6 @@ import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 public class DescribeActionGUI extends DescribeDescribableGUI {
 
     public DescribeActionGUI(MagicScanController controller, SpellAction action, HumanEntity human) {
-        super(controller.getMessage("gui.describe_action.title", StringUtilities.replaceMap("$name", action.getName())), action, human);
+        super(controller.getMessage("gui.describe_action.title", ImmutableMap.of("$name", action.getName())), action, human);
     }
 }

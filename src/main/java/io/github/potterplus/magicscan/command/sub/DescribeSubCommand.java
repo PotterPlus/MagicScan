@@ -1,7 +1,9 @@
 package io.github.potterplus.magicscan.command.sub;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
+import io.github.potterplus.api.command.CommandFlag;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
@@ -26,7 +28,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import static io.github.potterplus.api.string.StringUtilities.equalsAny;
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * TODO Write docs
@@ -35,7 +36,7 @@ import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 public class DescribeSubCommand extends CommandBase.SubCommand {
 
     @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
     public MagicScanPlugin getPlugin() {
         return controller.getPlugin();
@@ -52,11 +53,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
         MagicScanController controller = getPlugin().getController();
         String sub = context.getArg(1);
         String key = context.getArg(2);
+        CommandFlag uiFlag = new CommandFlag.UserInterfaceFlag();
 
         if (sub == null || key == null) {
             context.sendMessage(MagicScanCommand.createUsage("/ms <sub> [args]"));
         } else {
-            Map<String, String> replace = replaceMap("$key", key);
+            Map<String, String> replace = ImmutableMap.of("$key", key);
             String[] keys = StringUtils.split(context.getMessage(2), " ");
 
             if (equalsAny(sub, "actions", "action")) {
@@ -68,12 +70,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         actions.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_action", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_action", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (actions.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (actions.size() == 1) {
@@ -87,7 +89,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(actions), context.getSender())
@@ -103,12 +105,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         mobs.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_mob", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_mob", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (mobs.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (mobs.size() == 1) {
@@ -122,7 +124,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(mobs), context.getSender())
@@ -138,12 +140,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         paths.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_path", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_path", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (paths.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (paths.size() == 1) {
@@ -157,7 +159,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(paths), context.getSender())
@@ -173,12 +175,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         categories.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_spell_category", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_spell_category", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (categories.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (categories.size() == 1) {
@@ -192,7 +194,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(categories), context.getSender())
@@ -208,12 +210,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         spells.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_spell", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_spell", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (spells.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (spells.size() == 1) {
@@ -227,7 +229,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(spells), context.getSender())
@@ -243,12 +245,12 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                     if (opt.isPresent()) {
                         wands.add(opt.get());
                     } else {
-                        controller.sendMessage(context, "invalid_wand", replaceMap("$key", k));
+                        controller.sendMessage(context, "invalid_wand", ImmutableMap.of("$key", k));
                     }
                 }
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         if (wands.size() == 0) {
                             controller.sendMessage(context, "nothing_to_show");
                         } else if (wands.size() == 1) {
@@ -262,7 +264,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                                 .runTask(getPlugin());
                     }
                 } else if (context.isConsole()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         new DescribeCollectionTask(controller, new ArrayList<>(wands), context.getSender())
@@ -277,7 +279,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                 Optional<MagicSpell> optSpell = controller.resolveSpell(key);
 
                 if (!optSpell.isPresent()) {
-                    controller.sendMessage(context, "invalid_spell", replaceMap("$key", key));
+                    controller.sendMessage(context, "invalid_spell", ImmutableMap.of("$key", key));
 
                     return;
                 }
@@ -294,7 +296,7 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                 SpellProgression progression = optProgression.get();
 
                 if (context.isPlayer()) {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         DescribeSpellProgressionGUI gui = new DescribeSpellProgressionGUI(controller, progression, context.getPlayer());
 
                         gui.activate();
@@ -302,14 +304,14 @@ public class DescribeSubCommand extends CommandBase.SubCommand {
                         Utilities.describe(context.getPlayer(), progression);
                     }
                 } else {
-                    if (context.hasFlag("gui")) {
+                    if (context.hasFlag(uiFlag)) {
                         controller.sendMessage(context, "no_gui_console");
                     } else {
                         Utilities.describe(context.getPlayer(), progression);
                     }
                 }
             } else {
-                controller.sendMessage(context, "unknown_magic_type", replaceMap("$type", sub));
+                controller.sendMessage(context, "unknown_magic_type", ImmutableMap.of("$type", sub));
             }
 
             if (equalsAny(sub, "progression", "levels", "level")) {

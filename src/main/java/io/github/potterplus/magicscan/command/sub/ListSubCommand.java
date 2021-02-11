@@ -2,8 +2,9 @@ package io.github.potterplus.magicscan.command.sub;
 
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
-import io.github.potterplus.api.gui.ConfirmPrompt;
+import io.github.potterplus.api.command.CommandFlag;
 import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.ui.prompt.ConfirmPrompt;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
@@ -41,16 +42,17 @@ public class ListSubCommand extends CommandBase.SubCommand {
 
         MagicScanController controller = getPlugin().getController();
         String sub = context.getArg(1);
+        CommandFlag uiFlag = new CommandFlag.UserInterfaceFlag();
 
         if (equalsAny(sub, "paths", "path")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListPathsGUI(context.getPlayer(), controller).activate();
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getPaths()), context.getSender()).runTask(getPlugin());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getPaths()), context.getSender()).runTask(getPlugin());
@@ -58,13 +60,13 @@ public class ListSubCommand extends CommandBase.SubCommand {
             }
         } else if (equalsAny(sub, "category", "cat", "categories", "spellcategory", "spellcat")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListSpellCategoriesGUI(context.getPlayer(), controller).activate();
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getSpellCategories()), context.getSender()).runTask(getPlugin());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getSpellCategories()), context.getSender()).runTask(getPlugin());
@@ -72,7 +74,7 @@ public class ListSubCommand extends CommandBase.SubCommand {
             }
         } else if (equalsAny(sub, "spells", "spell")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListSpellsGUI(context.getPlayer(), controller).activate();
                 } else {
                     ConfirmPrompt confirm = new DescribeLargeCollectionConfirmPrompt(
@@ -91,7 +93,7 @@ public class ListSubCommand extends CommandBase.SubCommand {
                     confirm.activate(context.getPlayer());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getSpells()), context.getSender()).runTask(getPlugin());
@@ -99,13 +101,13 @@ public class ListSubCommand extends CommandBase.SubCommand {
             }
         } else if (equalsAny(sub, "wands", "wand")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListWandsGUI(context.getPlayer(), controller).activate();
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getWands()), context.getSender()).runTask(getPlugin());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getWands()), context.getSender()).runTask(getPlugin());
@@ -113,13 +115,13 @@ public class ListSubCommand extends CommandBase.SubCommand {
             }
         } else if (equalsAny(sub, "actions", "action")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListActionsGUI(context.getPlayer(), controller).activate();
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getActions()), context.getSender()).runTask(getPlugin());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getActions()), context.getSender()).runTask(getPlugin());
@@ -127,13 +129,13 @@ public class ListSubCommand extends CommandBase.SubCommand {
             }
         } else if (equalsAny(sub, "mobs", "mob")) {
             if (context.isPlayer()) {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     new ListMobsGUI(context.getPlayer(), controller).activate();
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getMobs()), context.getSender()).runTask(getPlugin());
                 }
             } else {
-                if (context.hasFlag("gui")) {
+                if (context.hasFlag(uiFlag)) {
                     controller.sendMessage(context, "no_gui_console");
                 } else {
                     new DescribeCollectionTask(controller, new ArrayList<>(controller.getMobs()), context.getSender()).runTask(getPlugin());

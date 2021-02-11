@@ -1,8 +1,9 @@
 package io.github.potterplus.magicscan.gui.prompt;
 
 import io.github.potterplus.api.command.CommandContext;
-import io.github.potterplus.api.gui.ConfirmPrompt;
+import io.github.potterplus.api.command.CommandFlag;
 import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.ui.prompt.ConfirmPrompt;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.scan.Scan;
 import org.bukkit.entity.Player;
@@ -51,7 +52,9 @@ public class OverwriteExistingScanConfirmPrompt extends ConfirmPrompt {
 
         context.performCommand("magicscan scan create");
 
-        if (context.hasFlag("gui")) {
+        CommandFlag uiFlag = new CommandFlag.UserInterfaceFlag();
+
+        if (context.hasFlag(uiFlag)) {
             new BukkitRunnable() {
                 @Override
                 public void run() {

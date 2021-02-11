@@ -1,11 +1,10 @@
 package io.github.potterplus.magicscan.gui;
 
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
-import io.github.potterplus.magicscan.command.MagicScanCommand;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
 import io.github.potterplus.magicscan.gui.prompt.ClearScansConfirmPrompt;
@@ -50,7 +49,7 @@ public class ListScansGUI extends ListDescribablesGUI {
         }
     }
 
-    public GUIButton createButton(Scan scan) {
+    public UIButton createButton(Scan scan) {
         Icon item = Icon.of(scan.describeAsItem(getTarget()));
         boolean isOwned = scan.getSender().equals(getTarget());
 
@@ -58,12 +57,12 @@ public class ListScansGUI extends ListDescribablesGUI {
             item.addLore("&8> &aLeft-click &7to manage");
             item.addLore("&8> &cRight-click &7to cancel");
         } else {
-            if (getTarget().hasPermission(MagicScanCommand.PERMISSION_SCAN_DELETE)) {
+            if (getTarget().hasPermission("magicscan.command.scan.delete")) {
                 item.addLore("&8> &cRight-click &7to force delete");
             }
         }
 
-        GUIButton button = new GUIButton(item);
+        UIButton button = new UIButton(item);
 
         button.setListener(event -> {
             event.setCancelled(true);
@@ -107,7 +106,7 @@ public class ListScansGUI extends ListDescribablesGUI {
         }
 
         Scan scan = (Scan) describable;
-        GUIButton button = this.createButton(scan);
+        UIButton button = this.createButton(scan);
 
         this.addButton(button);
     }
@@ -127,8 +126,8 @@ public class ListScansGUI extends ListDescribablesGUI {
     public void refreshToolbar() {
         ConfigFile config = getController().getConfig();
 
-        if (getTarget().hasPermission(MagicScanCommand.PERMISSION_SCAN_CLEAR)) {
-            GUIButton clear = new GUIButton(
+        if (getTarget().hasPermission("magicscan.command.scan.clear")) {
+            UIButton clear = new UIButton(
                     Icon
                             .of(config.getIcon("empty", Material.BARRIER))
                             .name("&cClear all scans")
@@ -145,7 +144,7 @@ public class ListScansGUI extends ListDescribablesGUI {
                 if (human instanceof Player) {
                     Player player = (Player) human;
 
-                    if (player.hasPermission(MagicScanCommand.PERMISSION_SCAN_CLEAR)) {
+                    if (player.hasPermission("magicscan.command.scan.clear")) {
                         new ClearScansConfirmPrompt(getController(), this).activate(player);
                     }
                 }
@@ -154,9 +153,9 @@ public class ListScansGUI extends ListDescribablesGUI {
             this.setToolbarItem(0, clear);
         }
 
-        GUIButton create = getController().getScanController().hasScan(getTarget())
+        UIButton create = getController().getScanController().hasScan(getTarget())
                 ? createButton(getController().getScanController().getQueuedScan(getTarget()))
-                : new GUIButton(
+                : new UIButton(
                 Icon
                         .start(Material.EMERALD)
                         .name("&aCreate new scan")
@@ -201,7 +200,7 @@ public class ListScansGUI extends ListDescribablesGUI {
                 item.name("&cNo scans found");
             }
 
-            this.addButton(new AutoGUIButton(item));
+            this.addButton(new AutoUIButton(item));
         }
     }
 }

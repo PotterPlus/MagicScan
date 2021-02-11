@@ -1,9 +1,10 @@
 package io.github.potterplus.magicscan.gui;
 
-import io.github.potterplus.api.gui.PaginatedGUI;
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.ui.PaginatedUserInterface;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.magic.MagicSpell;
@@ -19,21 +20,19 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
-
 /**
  * TODO Write docs
  */
-public class ScanResultsGUI extends PaginatedGUI {
+public class ScanResultsGUI extends PaginatedUserInterface {
 
     public enum SortBy {
         ALPHABETICAL,
         HIGHEST_TO_LOWEST;
 
-        private static final SortBy[] vals = values();
+        private static final SortBy[] values = values();
 
         public SortBy next() {
-            return vals[(this.ordinal()+1) % vals.length];
+            return values[(this.ordinal()+1) % values.length];
         }
 
         public String getName() {
@@ -73,7 +72,7 @@ public class ScanResultsGUI extends PaginatedGUI {
 
     public void refreshToolbar() {
         ConfigFile config = controller.getConfig();
-        Map<String, String> replace = replaceMap(
+        Map<String, String> replace = ImmutableMap.of(
                 "$sortBy", sortBy.getName(),
                 "$elapsedTime", getResults().getElapsedTime() + "s",
                 "$violationsCount", String.valueOf(getResults().getViolationsCount()),
@@ -81,7 +80,7 @@ public class ScanResultsGUI extends PaginatedGUI {
                 "$validSpellCount", String.valueOf(getResults().getValidSpellCount())
         );
 
-        GUIButton sortBy = new GUIButton(
+        UIButton sortBy = new UIButton(
                 Icon
                 .of(config.getIcon("cycle", Material.MAP))
                 .name(controller.getMessage("gui.scan_results.sort_by.name", replace))
@@ -96,13 +95,13 @@ public class ScanResultsGUI extends PaginatedGUI {
             this.update(event);
         });
 
-        GUIButton time = new AutoGUIButton(
+        UIButton time = new AutoUIButton(
                 Icon
                         .of(config.getIcon("time", Material.CLOCK))
                         .name(controller.getMessage("gui.scan_results.time.name", replace))
         );
 
-        GUIButton totals = new AutoGUIButton(
+        UIButton totals = new AutoUIButton(
                 Icon
                         .of(config.getIcon("attribute", Material.PAPER))
                         .name(controller.getMessage("gui.scan_results.totals.name", replace))
@@ -110,14 +109,14 @@ public class ScanResultsGUI extends PaginatedGUI {
         );
 
         if (config.isUsingPastebinIntegration() && getResults().getPastebinURL() != null) {
-            GUIButton pastebinLink = new GUIButton(
+            UIButton pastebinLink = new UIButton(
                     Icon
                             .of(config.getIcon("attribute", Material.PAPER))
                             .name(controller.getMessage("gui.scan_results.pastebin_url.name"))
                             .lore(controller.getMessage("gui.scan_results.pastebin_url.lore"))
             );
 
-            pastebinLink.setListener(event -> controller.sendMessage(event.getWhoClicked(), "pastebin_posted", replaceMap("$url", getResults().getPastebinURL())));
+            pastebinLink.setListener(event -> controller.sendMessage(event.getWhoClicked(), "pastebin_posted", ImmutableMap.of("$url", getResults().getPastebinURL())));
 
             this.setToolbarItem(6, pastebinLink);
         }
@@ -146,13 +145,13 @@ public class ScanResultsGUI extends PaginatedGUI {
             if (icon.isPresent()) {
                 Icon item = Icon
                         .of(icon.get())
-                        .lore(controller.getLore("gui.scan_results.violation.lore", replaceMap("$violationsCount", String.valueOf(violations.size()))));
+                        .lore(controller.getLore("gui.scan_results.violation.lore", ImmutableMap.of("$violationsCount", String.valueOf(violations.size()))));
 
                 for (Violation violation : violations) {
                     item.addLore(violation.toString());
                 }
 
-                GUIButton button = new AutoGUIButton(item);
+                UIButton button = new AutoUIButton(item);
 
                 this.addButton(button);
             }

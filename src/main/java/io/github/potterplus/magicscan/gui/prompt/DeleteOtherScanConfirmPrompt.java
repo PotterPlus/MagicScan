@@ -1,14 +1,13 @@
 package io.github.potterplus.magicscan.gui.prompt;
 
-import io.github.potterplus.api.gui.ConfirmPrompt;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
+import io.github.potterplus.api.ui.prompt.ConfirmPrompt;
 import io.github.potterplus.magicscan.MagicScanController;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 
 /**
  * Copyright (c) 2013-2020 Tyler Grissom
@@ -32,12 +31,12 @@ public class DeleteOtherScanConfirmPrompt extends ConfirmPrompt {
     @Override
     public void onConfirm(InventoryClickEvent event) {
         controller.getScanController().removeScan(target);
-        controller.sendMessage(initiator, "scan_deleted_other", replaceMap("$name", target.getName()));
-        controller.sendMessage(target, "scan_cleared", replaceMap("$name", initiator.getName()));
+        controller.sendMessage(initiator, "scan_deleted_other", ImmutableMap.of("$name", target.getName()));
+        controller.sendMessage(target, "scan_cleared", ImmutableMap.of("$name", initiator.getName()));
     }
 
     @Override
     public void onCancel(Player player) {
-        controller.sendMessage(initiator, "scan_not_deleted_other", replaceMap("$name", target.getName()));
+        controller.sendMessage(initiator, "scan_not_deleted_other", ImmutableMap.of("$name", target.getName()));
     }
 }

@@ -1,11 +1,11 @@
 package io.github.potterplus.magicscan.gui;
 
-import io.github.potterplus.api.gui.GUI;
-import io.github.potterplus.api.gui.button.AutoGUIButton;
-import io.github.potterplus.api.gui.button.GUIButton;
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.BooleanFormatter;
-import io.github.potterplus.api.string.StringUtilities;
+import io.github.potterplus.api.ui.UserInterface;
+import io.github.potterplus.api.ui.button.AutoUIButton;
+import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.file.ConfigFile;
 import io.github.potterplus.magicscan.rule.SpellRule;
@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * TODO Write docs
  */
-public class ManageScanGUI extends GUI {
+public class ManageScanGUI extends UserInterface {
 
     @NonNull
     private MagicScanController controller;
@@ -78,7 +78,7 @@ public class ManageScanGUI extends GUI {
                 .name(controller.getMessage("gui.manage_scan.execute_not_ready.name"))
                 .lore(controller.getLore("gui.manage_scan.execute_not_ready.lore"));
 
-        GUIButton execute = new GUIButton(readyIcon);
+        UIButton execute = new UIButton(readyIcon);
 
         execute.setListener(event -> {
             event.setCancelled(true);
@@ -94,16 +94,16 @@ public class ManageScanGUI extends GUI {
 
         this.setButton(0, execute);
 
-        GUIButton time = new AutoGUIButton(
+        UIButton time = new AutoUIButton(
                 Icon
                         .of(config.getIcon("time", Material.CLOCK))
-                        .name(controller.getMessage("gui.manage_scan.time.name", StringUtilities.replaceMap("$time", controller.getConfig().getDateFormat().format(scan.getCreatedAt())))
+                        .name(controller.getMessage("gui.manage_scan.time.name", ImmutableMap.of("$time", controller.getConfig().getDateFormat().format(scan.getCreatedAt())))
                         )
         );
 
         this.setButton(8, time);
 
-        GUIButton logToFile = new GUIButton(
+        UIButton logToFile = new UIButton(
                 scan.getOptions().isLogToFile()
                         ? enabled.name(controller.getMessage("gui.manage_scan.log_to_file_enabled.name"))
                         : disabled.name(controller.getMessage("gui.manage_scan.log_to_file_disabled.name"))
@@ -119,7 +119,7 @@ public class ManageScanGUI extends GUI {
             this.update(event);
         });
 
-        GUIButton scanAllRuleTypes = new GUIButton(
+        UIButton scanAllRuleTypes = new UIButton(
                 scan.getOptions().isScanAllRuleTypes()
                         ? enabled.name(controller.getMessage("gui.manage_scan.scan_all_rule_types_enabled.name"))
                         : disabled.name(controller.getMessage("gui.manage_scan.scan_all_rule_types_disabled.name"))
@@ -135,7 +135,7 @@ public class ManageScanGUI extends GUI {
             this.update(event);
         });
 
-        GUIButton scanHidden = new GUIButton(
+        UIButton scanHidden = new UIButton(
                 scan.getOptions().isScanHidden()
                         ? enabled.name(controller.getMessage("gui.manage_scan.scan_hidden_enabled.name"))
                         : disabled.name(controller.getMessage("gui.manage_scan.scan_hidden_disabled.name"))
@@ -151,7 +151,7 @@ public class ManageScanGUI extends GUI {
             this.update(event);
         });
 
-        GUIButton visual = new GUIButton(
+        UIButton visual = new UIButton(
                 scan.getOptions().isVisual()
                         ? enabled.name(controller.getMessage("gui.manage_scan.visual_enabled.name"))
                         : disabled.name(controller.getMessage("gui.manage_scan.visual_disabled.name"))
@@ -178,7 +178,7 @@ public class ManageScanGUI extends GUI {
                 .lore(controller.getLore("gui.manage_scan.edit_rules.lore"));
 
         for (SpellRule rule : controller.getSpellRules()) {
-            Map<String, String> replace = StringUtilities.replaceMap(
+            Map<String, String> replace = ImmutableMap.of(
                     "$type", StringUtils.capitalize(rule.getRuleType().name().toLowerCase()),
                     "$rule", rule.getKey(),
                     "$bool", BooleanFormatter.ENABLED_DISABLED.format(!scan.isOverridden(rule.getKey()))
@@ -187,7 +187,7 @@ public class ManageScanGUI extends GUI {
             editRulesItem.addLore(controller.getMessage("gui.manage_scan.edit_rules.lore_line_format", replace));
         }
 
-        GUIButton editRules = new GUIButton(editRulesItem);
+        UIButton editRules = new UIButton(editRulesItem);
 
         editRules.setListener(event -> {
             event.setCancelled(true);

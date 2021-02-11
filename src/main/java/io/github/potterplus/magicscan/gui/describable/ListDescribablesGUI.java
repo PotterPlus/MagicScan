@@ -1,7 +1,7 @@
 package io.github.potterplus.magicscan.gui.describable;
 
-import io.github.potterplus.api.gui.PaginatedGUI;
-import io.github.potterplus.api.gui.button.AutoGUIButton;
+import io.github.potterplus.api.ui.PaginatedUserInterface;
+import io.github.potterplus.api.ui.button.AutoUIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.misc.Describable;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Represents a paginated GUI which is intended to be populated with Describables.
  */
-public abstract class ListDescribablesGUI extends PaginatedGUI {
+public abstract class ListDescribablesGUI extends PaginatedUserInterface {
 
     public static ListDescribablesGUI custom(MagicScanController controller, HumanEntity target, List<Describable> describables, String titleKey) {
         if (describables == null || describables.isEmpty()) {
@@ -31,10 +31,10 @@ public abstract class ListDescribablesGUI extends PaginatedGUI {
     }
 
     @Getter @NonNull
-    private HumanEntity target;
+    private final HumanEntity target;
 
     @Getter @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
     public ListDescribablesGUI(String name, HumanEntity target, MagicScanController controller) {
         super(name);
@@ -46,7 +46,7 @@ public abstract class ListDescribablesGUI extends PaginatedGUI {
     }
 
     public void populate(Describable describable) {
-        this.addButton(new AutoGUIButton(describable.describeAsItem(this.target)));
+        this.addButton(new AutoUIButton(describable.describeAsItem(this.target)));
     }
 
     public void activate() {

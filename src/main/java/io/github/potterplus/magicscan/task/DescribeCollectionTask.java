@@ -1,5 +1,6 @@
 package io.github.potterplus.magicscan.task;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.misc.Describable;
 import io.github.potterplus.magicscan.misc.Utilities;
@@ -13,8 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-import static io.github.potterplus.api.string.StringUtilities.replaceMap;
-
 /**
  * A task to describe a collection of Describables to a CommandSender.
  */
@@ -22,17 +21,17 @@ import static io.github.potterplus.api.string.StringUtilities.replaceMap;
 public class DescribeCollectionTask extends BukkitRunnable {
 
     @NonNull
-    private MagicScanController controller;
+    private final MagicScanController controller;
 
     @NonNull
-    private List<Describable> describables;
+    private final List<Describable> describables;
 
     @NonNull
-    private CommandSender to;
+    private final CommandSender to;
 
     @Override
     public void run() {
-        controller.sendMessage(to, "describing_things", replaceMap("$amount", String.valueOf(describables.size())));
+        controller.sendMessage(to, "describing_things", ImmutableMap.of("$amount", String.valueOf(describables.size())));
 
         new BukkitRunnable() {
             @Override
@@ -46,7 +45,7 @@ public class DescribeCollectionTask extends BukkitRunnable {
 
                     for (Describable d : describables) {
                         new DescribeTask(d, Bukkit.getConsoleSender())
-                                .runTaskLater(controller.getPlugin(), step * controller.getConfig().getInterval() * 4);
+                                .runTaskLater(controller.getPlugin(), (long) step * controller.getConfig().getInterval() * 4);
 
                         step++;
                     }
