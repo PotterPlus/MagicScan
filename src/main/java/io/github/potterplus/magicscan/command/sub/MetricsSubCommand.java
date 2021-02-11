@@ -2,16 +2,19 @@ package io.github.potterplus.magicscan.command.sub;
 
 import io.github.potterplus.api.command.CommandBase;
 import io.github.potterplus.api.command.CommandContext;
+import io.github.potterplus.api.string.HoverMessage;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.MagicScanPlugin;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.potterplus.api.string.StringUtilities.equalsAny;
+import static io.github.potterplus.api.string.StringUtilities.replace;
 
 /**
  * TODO Write docs
@@ -27,6 +30,8 @@ public class MetricsSubCommand extends CommandBase.SubCommand {
     }
 
     private void doOverallMetrics(CommandContext context) {
+        CommandSender s = context.getSender();
+
         context.sendMessage("&8&m----------------------------------------");
         context.sendMessage(" &bMagicScan Metrics");
         context.sendMessage(" &7Some numbers about your Magic setup");
@@ -42,43 +47,27 @@ public class MetricsSubCommand extends CommandBase.SubCommand {
         replace.put("%mobs%", String.valueOf(controller.getMobs().size()));
         replace.put("$wands%", String.valueOf(controller.getWands().size()));
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                context.sendMessage("");
-                context.sendMessage(" &dSpells");
-                context.sendMessage(" &8> &bMS &7is tracking &e%spells_tracking% &7out of &e%spells_all% &7spells.", replace);
-                context.sendMessage(" &8> &e%spell_cats% &7spell categories.", replace);
-                context.sendMessage(" &8> &e%spell_actions% &7spell actions.", replace);
-            }
-        }.runTaskLater(getPlugin(), 40);
+        HoverMessage spellsHm = HoverMessage
+                .compose(" &dSpells")
+                .hoverText(replace(Arrays.asList(
+                        " &8> &bMS &7is tracking 7e%spells_tracking &7out of &e%spells_all% &7spells.",
+                        " &8> &e%spell_cats% &7spell categories.",
+                        " &8> &e%spell_actions% &7spell actions."
+                ), replace));
+        HoverMessage pathsHm = HoverMessage
+                .compose(" &dPaths")
+                .withHover(replace(" &8> &7There are &e%paths% &7paths.", replace));
+        HoverMessage mobsHm = HoverMessage
+                .compose(" &dMobs")
+                .withHover(replace(" &8> &7There are &e%mobs% &7mobs.", replace));
+        HoverMessage wandsHm = HoverMessage
+                .compose(" &dWands")
+                .withHover(replace(" &8> &7There are &e%wands% &7wands.", replace));
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                context.sendMessage("");
-                context.sendMessage(" &dPaths");
-                context.sendMessage(" &8> &7There are &e%paths% &7paths.", replace);
-            }
-        }.runTaskLater(getPlugin(), 80);
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                context.sendMessage("");
-                context.sendMessage(" &dMobs");
-                context.sendMessage(" &8> &7There are &e%mobs% &7mobs.", replace);
-            }
-        }.runTaskLater(getPlugin(), 120);
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                context.sendMessage("");
-                context.sendMessage(" &dWands");
-                context.sendMessage(" &8> &7There are &e%wands% &7wands.", replace);
-            }
-        }.runTaskLater(getPlugin(), 160);
+        spellsHm.send(s);
+        pathsHm.send(s);
+        mobsHm.send(s);
+        wandsHm.send(s);
     }
 
     @Override

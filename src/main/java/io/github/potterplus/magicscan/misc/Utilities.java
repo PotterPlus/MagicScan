@@ -1,14 +1,9 @@
 package io.github.potterplus.magicscan.misc;
 
 import io.github.potterplus.api.command.CommandContext;
+import io.github.potterplus.api.string.HoverMessage;
 import io.github.potterplus.api.string.StringUtilities;
 import io.github.potterplus.magicscan.magic.MagicSpell;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Content;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -48,26 +43,11 @@ public class Utilities {
         sendMessages(context, describable.describe(context.getSender()));
     }
 
-    public static BaseComponent[] createCompactTextView(Player player, Describable describable) {
-        List<String> description = describable.describe(player);
-        String key = StringUtilities.color(description.get(0));
+    public static HoverMessage describeAsHoverMessage(CommandSender to, Describable desc) {
+        List<String> described = desc.describe(to);
 
-        description = StringUtilities.color(description.subList(1, description.size()));
-
-        Content[] contents = new Content[description.size()];
-
-        for (int i = 0; i < description.size(); i++) {
-            contents[i] = new Text(TextComponent.fromLegacyText(description.get(i) + "\n"));
-        }
-
-        HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, contents);
-        return new ComponentBuilder(new TextComponent(TextComponent.fromLegacyText(key)))
-                .event(event)
-                .create();
-    }
-
-    public static void sendCompact(Player player, Describable describable) {
-        player.spigot().sendMessage(createCompactTextView(player, describable));
+        return HoverMessage.compose(described.get(0))
+                .hoverText(described.subList(1, described.size()));
     }
 
     public static String spellList(List<MagicSpell> spells) {

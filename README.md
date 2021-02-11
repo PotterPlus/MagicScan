@@ -1,51 +1,16 @@
 # MagicScan
 
-Scans configurations for potential issues and provides deeper analytics for [NathanWolf's Magic plugin](https://github.com/elBukkit/MagicPlugin) to ensure you have the cleanest, working-as-intended setup as possible.
-
 [![Build Status](https://travis-ci.com/PotterPlus/MagicScan.svg?branch=master)](https://travis-ci.com/PotterPlus/MagicScan)
 
-## Compiling
-
-MagicScan uses the [Shadow](https://github.com/johnrengelman/shadow) Gradle plugin to compile a fat JAR of necessary dependencies.
-
-To build your own JAR file, navigate to the directory of your MagicScan repo clone in your favorite terminal and perform the following command:
-
-``
-./gradlew shadowJar
-``
-
-The resulting JAR file should be outputted to your `build/libs` folder.
+Scans configurations for potential issues and provides deeper analytics for [NathanWolf's Magic plugin](https://github.com/elBukkit/MagicPlugin) to ensure you have the cleanest, working-as-intended setup as possible.
 
 ## Commands
 
-| Denotes an alias
-
-<> Denotes a required parameter
-
-[] Denotes an optional parameter
-
-* /ms help - Displays command help
-* /ms reload|load - Reloads plugin configuration and refreshes sources
-* /ms scan|s <sub> - Scan related sub-commands
-* /ms list|l <spells|wands|paths|actions|mobs|categories> - List Magic elements
-* /ms describe|desc|d <spell|wand|path|progression|action|mob|category> <key> - Describes a specific Magic element
-* /ms quickscan|qs - Quickly initiates and performs a scan with default settings
-
-#### /ms scan Sub-commands
-
-* /ms s create - Creates a new scan
-* /ms s clear - Forcibly clears the current scan
-* /ms s delete - Deletes the scan
-* /ms s describe|desc|d|info - Describes the current scan
-* /ms s perform|execute|start - Performs the scan
-* /ms s override <rule> - Overrides the provided rule
+To do
 
 ## Permissions
 
-* magicscan.* - Super-permission for plugin commands
-* magicscan - Permits to use /magicscan
-* magicscan.reload - Permits to use /magicscan reload
-* magicscan.scan - Permits to use /magicscan scan
+To do
 
 ## Configuration
 

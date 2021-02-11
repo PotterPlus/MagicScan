@@ -51,8 +51,9 @@ public class SpellBreakdownGUI extends UserInterface {
                 MagicSpell prev = spell.getPreviousLevel().get();
                 Icon icon = Icon
                         .start(Material.ARROW)
-                        .name("&d&l<&d&l&m-- &7Previous level")
+                        .name("&b<&d&m--&r &7Previous level")
                         .lore(
+                                "",
                                 "&8> &eClick &7to break down the previous level",
                                 "",
                                 "  &7Current level&8: &e" + spell.getCurrentLevel()
@@ -75,8 +76,9 @@ public class SpellBreakdownGUI extends UserInterface {
                 MagicSpell next = spell.getNextLevel().get();
                 Icon icon = Icon
                         .start(Material.ARROW)
-                        .name("&d&l&m--&d&l> &7Next level")
+                        .name("&d&m--&r&d>&r &7Next level")
                         .lore(
+                                "",
                                 "&8> &eClick &7to break down the next level",
                                 "",
                                 "  &7Current level&8: &e" + spell.getCurrentLevel()
