@@ -3,6 +3,7 @@ package io.github.potterplus.magicscan.gui.describable.list;
 import com.google.common.collect.ImmutableMap;
 import io.github.potterplus.api.item.Icon;
 import io.github.potterplus.api.misc.PluginLogger;
+import io.github.potterplus.api.ui.button.AutoUIButton;
 import io.github.potterplus.api.ui.button.UIButton;
 import io.github.potterplus.magicscan.MagicScanController;
 import io.github.potterplus.magicscan.gui.describable.ListDescribablesGUI;
@@ -64,32 +65,13 @@ public class ListMobsGUI extends ListDescribablesGUI {
     @Override
     public void populate(Describable describable) {
         if (!(describable instanceof MagicMob)) {
-            PluginLogger.atSevere()
-                    .with("Cannot populate mob list GUI with incorrect describable type!")
-                    .print();
+            PluginLogger.atSevere("Cannot populate mob list GUI with incorrect describable type!");
 
             return;
         }
 
         MagicMob mob = (MagicMob) describable;
-        UIButton button = new UIButton(describable.describeAsItem(this.getTarget()));
-
-        button.setListener(event -> {
-            event.setCancelled(true);
-
-            if (getTarget() instanceof Player) {
-                Player target = (Player) getTarget();
-
-                switch (event.getClick()) {
-                    case LEFT:
-                        target.performCommand("mmob spawn " + mob.getKey());
-                        break;
-                    case RIGHT:
-                        target.performCommand("mmob clear " + mob.getKey());
-                        break;
-                }
-            }
-        });
+        UIButton button = new AutoUIButton(mob.describeAsItem(this.getTarget()));
 
         this.addButton(button);
     }

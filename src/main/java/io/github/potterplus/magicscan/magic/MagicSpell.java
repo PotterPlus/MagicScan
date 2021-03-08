@@ -516,12 +516,10 @@ public class MagicSpell extends MagicType<SpellTemplate> implements Comparable<M
 
         if (sender instanceof ConsoleCommandSender) {
             list.add("&8- &7key&8: &e" + this.getKey());
-            list.add("  &7name&8:");
+            list.add("  &7name&8: &e" + getNameString());
         } else {
-            list.add("&8- &7name&8:");
+            list.add("&8- &7name&8: &e" + getNameString());
         }
-
-        list.add("    " + getNameString());
 
         list.add("  &7description&8:");
         list.add("    " + getDescriptionString());

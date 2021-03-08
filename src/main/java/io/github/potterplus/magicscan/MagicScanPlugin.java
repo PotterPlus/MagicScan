@@ -1,5 +1,6 @@
 package io.github.potterplus.magicscan;
 
+import io.github.potterplus.api.misc.PluginLogger;
 import io.github.potterplus.api.ui.UserInterface;
 import io.github.potterplus.magicscan.command.MagicScanCommand;
 import io.github.potterplus.magicscan.listener.QuitListener;
@@ -9,6 +10,7 @@ import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
 import org.bukkit.plugin.java.annotation.command.Commands;
@@ -68,7 +70,7 @@ public class MagicScanPlugin extends JavaPlugin {
     @Getter @NonNull
     private MagicScanController controller;
 
-    @Getter@NonNull
+    @Getter @NonNull
     private MagicScanCommand command;
 
     @Override
@@ -78,9 +80,16 @@ public class MagicScanPlugin extends JavaPlugin {
 
         ConfigurationSerialization.registerClass(Scan.class, "Scan");
 
-        Bukkit.getPluginManager().registerEvents(new QuitListener(controller), this);
+        PluginManager pm = Bukkit.getPluginManager();
 
-        UserInterface.prepare(this);
+        pm.registerEvents(new QuitListener(controller), this);
+
+        if (pm.isPluginEnabled("PotterPlusAPI")) {
+            PluginLogger.atInfo("PotterPlusAPI found. Will not prepare UIs to avoid issues.");
+        } else {
+            PluginLogger.atInfo("PotterPlusAPI not found. Preparing user interfaces.");
+            UserInterface.prepare(this);
+        }
 
         this.command = new MagicScanCommand(this);
     }

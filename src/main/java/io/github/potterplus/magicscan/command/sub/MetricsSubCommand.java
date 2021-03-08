@@ -45,12 +45,12 @@ public class MetricsSubCommand extends CommandBase.SubCommand {
         replace.put("%spell_actions%", String.valueOf(controller.getActions().size()));
         replace.put("%paths%", String.valueOf(controller.getPaths().size()));
         replace.put("%mobs%", String.valueOf(controller.getMobs().size()));
-        replace.put("$wands%", String.valueOf(controller.getWands().size()));
+        replace.put("%wands%", String.valueOf(controller.getWands().size()));
 
         HoverMessage spellsHm = HoverMessage
                 .compose(" &dSpells")
                 .hoverText(replace(Arrays.asList(
-                        " &8> &bMS &7is tracking 7e%spells_tracking &7out of &e%spells_all% &7spells.",
+                        " &8> &bMS &7is tracking &e%spells_tracking% &7out of &e%spells_all% &7spells.",
                         " &8> &e%spell_cats% &7spell categories.",
                         " &8> &e%spell_actions% &7spell actions."
                 ), replace));
